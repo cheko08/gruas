@@ -1,0 +1,36 @@
+body{
+	padding-top: 51px;
+}
+
+.homepage
+{
+	text-align: center;
+}
+
+.form-control {
+	width:95%;
+}
+
+.panel{
+	width: auto;
+	max-width: 600px;
+	margin: 20px auto 30px auto;
+}
+
+.float{
+	position: fixed;
+	top: 51px;
+	left: 0;
+	width: 100%;
+	text-align: center;
+}
+
+.cotizacion{
+	margin-top: 50px;
+	margin-bottom: 20px;
+}
+
+.radio{
+	margin-left: 10px;
+	font-size: 18px;
+}
