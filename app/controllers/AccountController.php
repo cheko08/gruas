@@ -187,7 +187,21 @@ class AccountController extends BaseController
     }
 
 
+    public function cuentas()
+    {
 
+      $cuentas = User::all();
+      return View::make('account.cuentas', array(
+        'link'    =>  'Cuentas',
+        'cuentas' =>  $cuentas
+        ));
+    }
+
+    public function deleteCuenta($id)
+    {
+      User::destroy($id);
+      return Redirect::route('cuentas');
+    }
 
    
 }

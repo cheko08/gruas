@@ -17,12 +17,12 @@ class HomeController extends BaseController {
 
 	public function home()
 	{	
-		$gruas=DB::table('gruas')->select('tipo')->groupBy('tipo')->get();
+		$servicios=DB::table('servicios')->select('tipo')->orderBy('tipo', 'ASC')->groupBy('tipo')->get();
 		$tickets=Ticket::where('status', '=', 'Activo')->get();
 		return View::make('home', array(
-			'link'	=>	'Inicio',
-			'gruas'	=>	$gruas,
-			'tickets'	=>$tickets
+			'link'	    =>	'Inicio',
+			'servicios'	=>	$servicios,
+			'tickets'	=>  $tickets
 			));
 	}
 

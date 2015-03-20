@@ -22,20 +22,26 @@
 						<li class="divider"></li>
 						@if(Auth::user()->role === 'Admin')
 						<li><a href="{{ URL::route('create-account') }}">Agregar Usuario</a></li>
-						<li><a href="">Ver Cuentas</a></li>
+						<li><a href="{{ URL::route('cuentas') }}">Ver Cuentas</a></li>
 						<li class="divider"></li>
-						<li><a href="">Agregar Operador</a></li>
-						<li><a href="">Ver Operadorares</a></li>
-						<li><a href="">Agregar Grúa</a></li>
-						<li><a href="">Ver Grúas</a></li>
+						<li><a href="{{ URL::route('crear-operador') }}">Agregar Operador</a></li>
+						<li><a href="{{ URL::route('operadores') }}">Ver Operadores</a></li>
+						<li><a href="{{ URL::route('crear-servicio') }}">Agregar Servicios</a></li>
+						<li><a href="{{ URL::route('ver-servicio') }}">Ver Servicios</a></li>
+						<li><a href="{{ URL::route('crear-vehiculo') }}">Agregar Vehículo</a></li>
+						<li><a href="{{ URL::route('ver-vehiculo') }}">Ver Vehículos</a></li>
+						<li><a href="{{ URL::route('tickets') }}">Tickets Cerrados</a></li>
 						<li><a href="">Reportes</a></li>
 						@endif
 
 						@if(Auth::user()->role === 'Tickets')
-						<li><a href="">Agregar Operador</a></li>
-						<li><a href="">Ver Operadorares</a></li>
-						<li><a href="">Agregar Grúa</a></li>
-						<li><a href="">Ver Grúas</a></li>
+						<li><a href="{{ URL::route('crear-operador') }}">Agregar Operador</a></li>
+						<li><a href="{{ URL::route('operadores') }}">Ver Operadores</a></li>
+						<li><a href="{{ URL::route('crear-servicio') }}">Agregar Servicios</a></li>
+						<li><a href="{{ URL::route('ver-servicio') }}">Ver Servicios</a></li>
+						<li><a href="{{ URL::route('crear-vehiculo') }}">Agregar Vehículo</a></li>
+						<li><a href="{{ URL::route('ver-vehiculo') }}">Ver Vehículos</a></li>
+						<li><a href="{{ URL::route('tickets') }}">Tickets Cerrados</a></li>
 						@endif
 	
 						<li class="divider"></li>

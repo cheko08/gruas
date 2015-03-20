@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	{{ HTML::style('assets/css/bootstrap.min.css') }}
 	{{ HTML::style('assets/css/styles.css') }}
+	{{ HTML::style('assets/css/print.css', array('media' => 'print')) }}
 	 <link rel="shortcut icon" href="{{ asset('images/favicon.ico')  }}" />
 	<title>{{ $link }}</title>
 </head>
@@ -28,7 +29,9 @@
 	@yield('content')
 
 	{{ HTML::script('assets/js/jquery-1.11.1.min.js') }}
+	{{ HTML::script('assets/js/format.js') }}
 	{{ HTML::script('assets/js/bootstrap.min.js') }}
+	{{ HTML::script('assets/js/functions.js') }}
 
 </body>
 </html>
