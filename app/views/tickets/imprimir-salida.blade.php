@@ -25,12 +25,12 @@
 			@endif
 			<div id="ticket">
 
-
+			<form action="{{ URL::route('precio-especial') }}" method="post">
 				<div class="row">
 					<div class="col-xs-6">
 						<div class="form-group">
 							<label for="Folio">ID</label>
-							<input type="text" class="form-control"  value="{{ $id }} " readonly>
+							<input type="text" name="id" class="form-control"  value="{{ $ticket->id }} " readonly>
 						</div>
 					</div>
 					<div class="col-xs-6">
@@ -45,14 +45,14 @@
 					<div class="col-xs-6">
 						<div class="form-group">
 							<label for="Tipo">Tipo de Servicio</label>
-							<input type="text"  class="form-control"  value="{{ $tipo }} " readonly>
+							<input type="text"  class="form-control"  value="{{ $ticket->servicio->tipo }} " readonly>
 						</div>
 					</div>
-					@if($tipo === 'Lowboy')
+					@if($ticket->servicio_id == 11)
 					<div class="col-xs-6">
 						<div class="form-group">
 							<label>Vehículos</label>
-							<input type="text" class="form-control"  value="{{ $vehiculo.' - '. $vehiculo_a }} " readonly>
+							<input type="text" class="form-control"  value="{{ $ticket->vehiculo->nombre.' - '.$ticket->adicional->nombre }}" readonly>
 						</div>	
 					</div>
 
@@ -60,7 +60,7 @@
 						<div class="col-xs-6">
 						<div class="form-group">
 							<label>Vehículo</label>
-							<input type="text" class="form-control"  value="{{ $vehiculo }} " readonly>
+							<input type="text" class="form-control"  value="{{ $ticket->vehiculo->nombre }} " readonly>
 						</div>	
 					</div>
 					@endif
@@ -72,7 +72,7 @@
 							<label>Cliente</label>
 
 							<input type="text" class="form-control" 
-							value="{{ $cliente->nombre.' '.$cliente->apellidos }} " readonly>
+							value="{{ $ticket->cliente->nombre.' '.$ticket->cliente->apellidos }} " readonly>
 
 						</div>
 					</div>
@@ -81,7 +81,7 @@
 							<label>Empresa</label>
 
 							<input type="text" class="form-control" 
-							value="{{ $cliente->empresa}} " readonly>
+							value="{{ $ticket->cliente->empresa}} " readonly>
 
 						</div>
 					</div>
@@ -94,7 +94,7 @@
 							<label>Teléfono de contacto</label>
 
 							<input type="text" class="form-control" 
-							value="{{ $cliente->telefono}} " readonly>
+							value="{{ $ticket->cliente->telefono}} " readonly>
 
 						</div>
 					</div>
@@ -103,7 +103,7 @@
 							<label>Dirección</label>
 
 							<input type="text" class="form-control" 
-							value="{{ $cliente->direccion}} " readonly>
+							value="{{ $ticket->cliente->direccion}} " readonly>
 
 						</div>
 					</div>
@@ -188,10 +188,8 @@
 					<div class="col-xs-6">
 						<div class="form-group">
 							<label>Operador</label>
-							@foreach($ticket->operadores as $operador)
 							<input type="text" class="form-control" 
-							value="{{ $operador->referencia."-".$operador->nombre." ".$operador->apellido}} " readonly>
-							@endforeach
+							value="{{ $ticket->operador->referencia."-".$ticket->operador->nombre." ".$ticket->operador->apellido}} " readonly>
 						</div>
 
 					</div>
@@ -204,8 +202,8 @@
 							<label>Precio por hora</label>
 							<div class="input-group">
 								<div class="input-group-addon">$</div>
-								<input id="a2" type="text" class="form-control" 
-								value="{{ $ticket->costo }}" name="precio" readonly >
+								<input  type="text" class="form-control" 
+								value="{{ $ticket->precio_hora }}" name="precio_hora" readonly >
 							</div>
 						</div>
 					</div>
@@ -216,8 +214,8 @@
 							<label>Precio total</label>
 							<div class="input-group">
 								<div class="input-group-addon">$</div>
-								<input type="text" class="form-control" id="a3" 
-								value="{{ $ticket->costo_total }}" name="precio_total" readonly >
+								<input type="text" class="form-control"  
+								value="{{ $ticket->precio_total }}" name="precio_total" readonly >
 							</div>
 						</div>
 					</div>
@@ -230,8 +228,8 @@
 							<label>Precio especial hora</label>
 							<div class="input-group">
 								<div class="input-group-addon">$</div>
-								<input id="a4" type="text" class="form-control" 
-								value="{{ $ticket->costo_especial }}" name="precio_especial" >
+								<input id="a2" type="text" class="form-control" 
+								value="{{ $ticket->precio_especial_hora }}" name="precio_especial_hora" >
 							</div>
 						</div>
 					</div>
@@ -242,8 +240,8 @@
 							<label>Precio especial total</label>
 							<div class="input-group">
 								<div class="input-group-addon">$</div>
-								<input type="text" class="form-control" id="a5" 
-								value="" name="precio_total" readonly >
+								<input type="text" class="form-control" id="a3" 
+								value="{{ $ticket->precio_especial_total }}" name="precio_especial_total" readonly >
 							</div>
 						</div>
 					</div>
@@ -259,10 +257,11 @@
 			<button  class="btn btn-primary" onclick="javascript:window.print()" >Imprimir Ticket</button>
 
 			@if($ticket->status === 'Cerrado' && Auth::user()->role === 'Admin')
-			<button type="submit" class="btn btn-success">Cambiar Precio</button>
+			<button type="submit" class="btn btn-success">Aplicar Precio Especial</button>
 			
-	
+	{{ Form::token() }}
 
+</form>
 			@endif
 		</div>
 

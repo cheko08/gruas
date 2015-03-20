@@ -10,9 +10,12 @@ class VehiculoController extends \BaseController {
 	public function vehiculos()
 	{
 		$vehiculos = Vehiculo::all();
+		$adicionales = Adicional::all();
+
 		return View::make('vehiculos.vehiculos', array(
 			'link' => 'Ver Vehiculos',
-			'vehiculos' => $vehiculos
+			'vehiculos' => $vehiculos,
+			'adicionales' => $adicionales
 			));
 	}
 
@@ -26,6 +29,7 @@ class VehiculoController extends \BaseController {
 	{
 
 		$servicios = Servicio::all();
+
 		return View::make('vehiculos.create', array(
 			'link' => 'Agregar Vehiculo',
 			'servicios' => $servicios
@@ -56,12 +60,27 @@ class VehiculoController extends \BaseController {
 			->withInput();
 		}
 
+		if(Input::get('servicio')=='Adicional')
+		{
+			$vehiculo = Adicional::create(array(
+				'nombre'         =>    Input::get('nombre'),
+				'num_economico'  =>    Input::get('num-economico'),
+				'placas'         =>    Input::get('placas'),
+				)); 
+
+			if($vehiculo)
+			{
+				return Redirect::route('crear-vehiculo')
+				->with('create','El vehículo ha sido agregado!');
+			}
+		}
+
 		$vehiculo = Vehiculo::create(array(
 
-			'tipo'    =>    Input::get('servicio'),
-			'nombre'  =>    Input::get('nombre'),
-			'num_economico'  => Input::get('num-economico'),
-			'placas'  =>    Input::get('placas'),
+			'servicio_id'    =>    Input::get('servicio'),
+			'nombre'         =>    Input::get('nombre'),
+			'num_economico'  =>    Input::get('num-economico'),
+			'placas'         =>    Input::get('placas'),
 			)); 
 
 		if($vehiculo)
@@ -71,17 +90,6 @@ class VehiculoController extends \BaseController {
 		}
 	}
 
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
 
 
 	/**
@@ -93,10 +101,24 @@ class VehiculoController extends \BaseController {
 	public function editVehiculo($id)
 	{
 		$servicios = Servicio::all();
-		$vehiculo = Vehiculo::find($id);
+		$vehiculo  = Vehiculo::find($id);
+
 		return View::make('vehiculos.edit', array(
-			'link' => 'Editar Vehiculo',
-			'vehiculo' => $vehiculo,
+			'link'      => 'Editar Vehiculo',
+			'vehiculo'  => $vehiculo,
+			'servicios' => $servicios
+			));
+	}
+
+
+	public function editAdicional($id)
+	{
+		$servicios = Servicio::all();
+		$vehiculo  = Adicional::find($id);
+
+		return View::make('vehiculos.edit-adicional', array(
+			'link'      => 'Editar Vehiculo',
+			'vehiculo'  => $vehiculo,
 			'servicios' => $servicios
 			));
 	}
@@ -124,17 +146,27 @@ class VehiculoController extends \BaseController {
 			$servicios = Servicio::all();
 			
 			return Redirect::route('vehiculo-editar', array(
-			'id' => $id,))
+				'id' => $id,))
 			->withErrors($validator)
 			->withInput();
 		}
 
-		
+		if(Input::get('servicio')=='Adicional')
+		{
+			$vehiculo = Adicional::find($id);
+		    $vehiculo->nombre        = Input::get('nombre');
+		    $vehiculo->placas        = Input::get('placas');
+		    $vehiculo->num_economico = Input::get('num-economico');
+		    $vehiculo->save();
+
+		return Redirect::route('ver-vehiculo')
+		->with('global','El vehículo ha sido actualizado!');
+		}
 
 		$vehiculo = Vehiculo::find($id);
-		$vehiculo->nombre     = Input::get('nombre');
-		$vehiculo->tipo   = Input::get('servicio');
-		$vehiculo->placas = Input::get('placas');
+		$vehiculo->nombre        = Input::get('nombre');
+		$vehiculo->servicio_id   = Input::get('servicio');
+		$vehiculo->placas        = Input::get('placas');
 		$vehiculo->num_economico = Input::get('num-economico');
 		$vehiculo->save();
 
@@ -151,7 +183,36 @@ class VehiculoController extends \BaseController {
 	 */
 	public function destroyVehiculo($id)
 	{
+		$tickets = Ticket::where('vehiculo_id',$id)->get();
+
+		if(count($tickets) > 0 )
+		{
+			return Redirect::route('ver-vehiculo')
+			->with('global-error','El Vehículo no puede ser borrado. Hay tickets con este vehículo asignado.');
+		}
+
 		Vehiculo::destroy($id);
+		return Redirect::route('ver-vehiculo');
+	}
+
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function destroyAdicional($id)
+	{
+		$tickets = Ticket::where('vehiculo_adicional_id',$id)->get();
+
+		if(count($tickets) > 0 )
+		{
+			return Redirect::route('ver-vehiculo')
+			->with('global-error','El Vehículo no puede ser borrado. Hay tickets con este vehículo asignado.');
+		}
+
+		Adicional::destroy($id);
 		return Redirect::route('ver-vehiculo');
 	}
 

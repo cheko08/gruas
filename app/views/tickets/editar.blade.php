@@ -2,7 +2,7 @@
 @section('content')
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<h3 class="panel-title">Ticket de Salida</h3>
+		<h3 class="panel-title">Editar Ticket de Salida</h3>
 	</div>
 	<div class="panel-body">
 		@if(Session::has('create'))
@@ -27,9 +27,9 @@
 			<div class="form-group">
 				<label>Vehículo</label>
 				<select class="form-control" name="vehiculo">
-					<option value="{{ $ticket->vehiculo }}" selected="selected">{{ $ticket->vehiculo }}</option>
+					<option value="{{ $ticket->vehiculo_id }}" selected="selected">{{$ticket->vehiculo->num_economico.' - '. $ticket->vehiculo->nombre }}</option>
 					@foreach($vehiculos as $vehiculo)
-					<option value="{{ $vehiculo->nombre }}">{{$vehiculo->num_economico.' - '. $vehiculo->nombre }}</option>
+					<option value="{{ $vehiculo->id }}">{{$vehiculo->num_economico.' - '. $vehiculo->nombre }}</option>
 					@endforeach
 				</select>
 			</div>
@@ -37,9 +37,9 @@
 			<div class="form-group">
 				<label>Adicional</label>
 				<select class="form-control" name="vehiculo_adicional">
-					<option value="{{ $ticket->vehiculo_adicional }}" selected="selected">{{ $ticket->vehiculo_adicional }}</option>
+					<option value="{{ $ticket->vehiculo_adicional_id }}" selected="selected">{{ $ticket->adicional->nombre }}</option>
 					@foreach($vehiculos_a as $vehiculo)
-					<option value="{{ $vehiculo->nombre }}">{{ $vehiculo->nombre }}</option>
+					<option value="{{ $vehiculo->id }}">{{ $vehiculo->nombre }}</option>
 					@endforeach
 				</select>
 			</div>
@@ -51,7 +51,7 @@
 			<div class="form-group">
 				<label for="Operador">Operador</label>
 					<select class="form-control" name="operador">
-					<option value="{{ $op_id }}" selected="selected">{{$op.' '.$op_a}}</option>
+					<option value="{{ $ticket->operador_id }}" selected="selected">{{$ticket->operador->nombre.' '.$ticket->operador->apellido}}</option>
 					@foreach($operadores as $operador)
 					<option value="{{ $operador->id }}">{{ $operador->nombre.' '.$operador->apellido }}</option>
 					@endforeach

@@ -27,7 +27,6 @@
 				<div class="{{ $errors->has('servicio') ? 'form-group has-error' : 'form-group' }}">
 				<label>Tipo de servicio</label>
 				<select class="form-control" name="servicio">
-				<option value="{{ $vehiculo->servicio->id }}" selected="selected">{{ $vehiculo->servicio->tipo }}</option>
 				<option value="Adicional">Adicional</option>
 					@foreach($servicios as $servicio)
 					<option value="{{ $servicio->tipo }}">{{ $servicio->tipo }}</option>

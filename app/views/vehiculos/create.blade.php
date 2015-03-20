@@ -29,7 +29,7 @@
 				<select class="form-control" name="servicio">
 				<option value="Adicional">Adicional</option>
 					@foreach($servicios as $servicio)
-					<option value="{{ $servicio->tipo }}">{{ $servicio->tipo }}</option>
+					<option value="{{ $servicio->id }}">{{ $servicio->tipo }}</option>
 					@endforeach
 				</select>
 			</div>

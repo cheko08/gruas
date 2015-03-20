@@ -24,7 +24,8 @@
 		<form method="post" action="{{URL::route('post-create-ticket')}}">
 			<div class="form-group">
 				<label for="Tipo">Tipo de Servicio</label>
-				<input type="text" name="tipo" class="form-control"  value="{{ $tipo }} " readonly>
+				<input type="text" class="form-control"  value="{{ $servicio->tipo }} " readonly>
+				<input type="hidden" name="tipo" value="{{ $servicio->id }}">
 				
 			</div>
 				
@@ -32,17 +33,17 @@
 				<label>Vehículo</label>
 				<select class="form-control" name="vehiculo">
 					@foreach($vehiculos as $vehiculo)
-					<option value="{{ $vehiculo->nombre }}">{{$vehiculo->num_economico.' - '. $vehiculo->nombre }}</option>
+					<option value="{{ $vehiculo->id }}">{{$vehiculo->num_economico.' - '. $vehiculo->nombre }}</option>
 					@endforeach
 				</select>
 			</div>
-			@if($tipo === 'Lowboy')
+			@if($servicio->id == 11)
 			<div class="form-group">
 				<label>Adicional</label>
 				<select class="form-control" name="vehiculo_adicional">
 					<option value=""></option>}
 					@foreach($vehiculos_a as $vehiculo)
-					<option value="{{ $vehiculo->nombre }}">{{ $vehiculo->nombre }}</option>
+					<option value="{{ $vehiculo->id }}">{{ $vehiculo->nombre }}</option>
 					@endforeach
 				</select>
 			</div>

@@ -10,7 +10,7 @@
 
 		@foreach($servicios as $servicio)
 
-		<a class="btn btn-primary btn-lg" href="{{ URL::route('create-ticket',$servicio->tipo) }}" role="button">{{ $servicio->tipo }}</a>
+		<a class="btn btn-primary btn-lg" href="{{ URL::route('create-ticket',$servicio->id) }}" role="button">{{ $servicio->tipo }}</a>
 
 		@endforeach
 
@@ -40,21 +40,19 @@
 		<tbody>
 			@foreach($tickets as $ticket)
 			<tr>
-				<td><a href="{{ URL::route('imprimir-ticket', $ticket->id ) }}" title="">0{{ $ticket->id }}</a></td>
+				<td><a href="{{ URL::route('imprimir-ticket', $ticket->id ) }}">0{{ $ticket->id }}</a></td>
 				<td>{{ date("d/m/Y",strtotime($ticket->fecha_salida))}}</td>
 				<td>{{ $ticket->hora_salida }}</td>
 				<td>{{ $ticket->horas_programadas }}</td>
-				@foreach($ticket->clientes as $cliente)
-				<td>{{ $cliente->nombre." ".$cliente->apellidos }}</td>
-				@endforeach
-				@foreach($ticket->operadores as $operador)
-				<td>{{ $operador->referencia."-".$operador->nombre." ".$operador->apellido }}</td>
-				@endforeach
-				@foreach($ticket->servicios as $servicio)
-				<td>{{ $servicio->tipo." - ".$ticket->vehiculo}}</td>
-				@endforeach
-				<td><a href="{{ URL::route('agregar-reporte', $ticket->id ) }}" class="btn btn-success btn-sm">Agregar reporte</a></td>
-				<td><a href="{{ URL::route('cerrar-ticket', $ticket->id ) }}" class="btn btn-default btn-sm">Cerrar ticket</a></td>
+				<td>{{ $ticket->cliente->nombre." ".$ticket->cliente->apellidos }}</td>
+				<td>{{ $ticket->operador->referencia."-".$ticket->operador->nombre." ".$ticket->operador->apellido }}</td>
+				<td>{{ $ticket->servicio->tipo." - ".$ticket->vehiculo->nombre}}</td>
+				<td>
+				<a href="{{ URL::route('agregar-reporte', $ticket->id ) }}" class="btn btn-success btn-sm">Agregar reporte</a>
+				</td>
+				<td>
+				<a href="{{ URL::route('cerrar-ticket', $ticket->id ) }}" class="btn btn-default btn-sm">Cerrar ticket</a>
+				</td>
 				<td>
 				<a href="{{ URL::route('ticket-editar', $ticket->id) }}">
 						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>

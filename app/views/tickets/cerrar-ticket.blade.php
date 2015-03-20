@@ -31,13 +31,13 @@
 						<div class="col-xs-6">
 							<div class="form-group">
 								<label for="Folio">ID</label>
-								<input type="text" class="form-control" name="id"  value="{{ $folio }} " readonly>
+								<input type="text" class="form-control" name="id"  value="{{ $ticket->id }}" readonly>
 							</div>
 						</div>
 						<div class="col-xs-6">
 							<div class="form-group">
 								<label for="Tipo">Folio</label>
-								<input type="text" name="folio" class="form-control" value="{{ $ticket->folio }} ">
+								<input type="text" name="folio" class="form-control" value="{{ $ticket->folio }}" required>
 							</div>
 						</div>
 					</div>
@@ -46,14 +46,14 @@
 						<div class="col-xs-6">
 							<div class="form-group">
 								<label for="Tipo">Tipo de Servicio</label>
-								<input type="text"  class="form-control"  value="{{ $tipo }} " readonly>
+								<input type="text"  class="form-control"  value="{{ $ticket->servicio->tipo }} " readonly>
 							</div>
 						</div>
-						@if($tipo === 'Lowboy')
+						@if($ticket->servicio->id == 11)
 					<div class="col-xs-6">
 						<div class="form-group">
 							<label>Vehículos</label>
-							<input type="text" class="form-control"  value="{{ $vehiculo.' - '. $vehiculo_a }} " readonly>
+							<input type="text" class="form-control"  value="{{ $ticket->vehiculo->nombre.' - '. $ticket->adicional->nombre }} " readonly>
 						</div>	
 					</div>
 
@@ -61,7 +61,7 @@
 						<div class="col-xs-6">
 						<div class="form-group">
 							<label>Vehículo</label>
-							<input type="text" class="form-control"  value="{{ $vehiculo }} " readonly>
+							<input type="text" class="form-control"  value="{{ $ticket->vehiculo->nombre }} " readonly>
 						</div>	
 					</div>
 					@endif
@@ -73,7 +73,7 @@
 								<label>Cliente</label>
 
 								<input type="text" class="form-control" 
-								value="{{ $cliente->nombre.' '.$cliente->apellidos }} " readonly>
+								value="{{ $ticket->cliente->nombre.' '.$ticket->cliente->apellidos }} " readonly>
 
 							</div>
 						</div>
@@ -82,7 +82,7 @@
 								<label>Empresa</label>
 
 								<input type="text" class="form-control" 
-								value="{{ $cliente->empresa}} " readonly>
+								value="{{ $ticket->cliente->empresa}} " readonly>
 
 							</div>
 						</div>
@@ -95,7 +95,7 @@
 								<label>Teléfono de contacto</label>
 
 								<input type="text" class="form-control" 
-								value="{{ $cliente->telefono}} " readonly>
+								value="{{ $ticket->cliente->telefono}} " readonly>
 
 							</div>
 						</div>
@@ -104,7 +104,7 @@
 								<label>Dirección</label>
 
 								<input type="text" class="form-control" 
-								value="{{ $cliente->direccion}} " readonly>
+								value="{{ $ticket->cliente->direccion}} " readonly>
 
 							</div>
 						</div>
@@ -138,7 +138,7 @@
 								<label>Fecha de término</label>
 
 								<input type="date" class="form-control" 
-								value="{{$ticket->fecha_entrada}} " name="fecha_entrada">
+								value="{{$ticket->fecha_entrada}} " name="fecha_entrada" required>
 
 							</div>
 						</div>
@@ -147,7 +147,7 @@
 								<label>Hora de término</label>
 
 								<input type="time" class="form-control" 
-								value="{{$ticket->hora_entrada}} " name="hora_entrada">
+								value="{{$ticket->hora_entrada}} " name="hora_entrada" required>
 
 							</div>
 						</div>
@@ -169,7 +169,7 @@
 								<label>Horas Reales</label>
 
 								<input type="number" class="form-control" id="a1" 
-								value="{{ $ticket->horas_reales}}" name="horas_reales" >
+								value="{{ $ticket->horas_reales}}" name="horas_reales" required>
 
 							</div>
 						</div>
@@ -189,10 +189,8 @@
 						<div class="col-xs-6">
 							<div class="form-group">
 								<label>Operador</label>
-								@foreach($ticket->operadores as $operador)
 								<input type="text" class="form-control" 
-								value="{{ $operador->referencia."-".$operador->nombre." ".$operador->apellido}} " readonly>
-								@endforeach
+								value="{{ $ticket->operador->referencia."-".$ticket->operador->nombre." ".$ticket->operador->apellido}} " readonly>
 							</div>
 
 						</div>
@@ -207,7 +205,7 @@
 									<div class="input-group">
 									<div class="input-group-addon">$</div>
 									<input id="a2" type="text" class="form-control" 
-									value="" name="precio" >
+									value="" name="precio_hora" required >
 								</div>
 							</div>
 						</div>

@@ -87,9 +87,17 @@ Route::group(array('before' => 'auth'), function(){
 		'as'   =>  'vehiculo-borrar',
 		'uses' =>  'VehiculoController@destroyVehiculo'
 		));
+    Route::get('vehiculos/vehiculo-borrar-adicional/{id}', array(
+		'as'   =>  'adicional-borrar',
+		'uses' =>  'VehiculoController@destroyAdicional'
+		));
 	Route::get('vehiculos/vehiculo-editar/{id}', array(
 		'as'   =>  'vehiculo-editar',
 		'uses' =>  'VehiculoController@editVehiculo'
+		));
+	Route::get('vehiculos/vehiculo-editar-adicional/{id}', array(
+		'as'   =>  'adicional-editar',
+		'uses' =>  'VehiculoController@editAdicional'
 		));
 	Route::get('reportes/agregar-reporte/{ticket_id}', array(
 		'as'   =>  'agregar-reporte',
@@ -150,6 +158,10 @@ Route::group(array('before' => 'auth'), function(){
  		Route::post('/tickets/editar-ticket',array(
  			'as'	=>	'post-editar-ticket',
  			'uses'	=>	'TicketController@postEditarTicket'
+ 			));
+ 		Route::post('/tickets/cambiar-precio',array(
+ 			'as'	=>	'precio-especial',
+ 			'uses'	=>	'TicketController@postPrecioEspecial'
  			));
  	
 

@@ -24,16 +24,9 @@
 				<td>{{ date("d/m/Y",strtotime($ticket->fecha_salida))}}</td>
 				<td>{{ $ticket->hora_salida }}</td>
 				<td>{{ $ticket->horas_programadas }}</td>
-				@foreach($ticket->clientes as $cliente)
-				<td>{{ $cliente->nombre." ".$cliente->apellidos }}</td>
-				@endforeach
-				@foreach($ticket->operadores as $operador)
-				<td>{{ $operador->referencia."-".$operador->nombre." ".$operador->apellido }}</td>
-				@endforeach
-				@foreach($ticket->servicios as $servicio)
-				<td>{{ $servicio->tipo." - ".$ticket->vehiculo}}</td>
-				@endforeach
-				
+				<td>{{ $ticket->cliente->nombre." ".$ticket->cliente->apellidos }}</td>
+				<td>{{ $ticket->operador->referencia."-".$ticket->operador->nombre." ".$ticket->operador->apellido }}</td>
+				<td>{{ $ticket->servicio->tipo." - ".$ticket->vehiculo->nombre}}</td>
 			</tr>
 
 			@endforeach

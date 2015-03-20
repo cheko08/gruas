@@ -158,6 +158,14 @@ class OperadorController extends \BaseController {
 	 */
 	public function destroyOperador($id)
 	{
+		$tickets = Ticket::where('operador_id',$id)->get();
+
+		if(count($tickets) > 0 )
+		{
+			return Redirect::route('operadores')
+			->with('global-error','El Operador no puede ser borrado. Hay tickets con este operador asignado.');
+		}
+		
 		Operador::destroy($id);
 		return Redirect::route('operadores');
 	}

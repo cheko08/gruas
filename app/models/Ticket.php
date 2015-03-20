@@ -2,23 +2,61 @@
 
 class Ticket extends Eloquent {
 
-	protected $fillable 	=	['folio','operador_id','servicio_id', 'vehiculo', 'vehiculo_adicional', 'tiempo_servicio', 'horas_programadas','horas_reales',  'fecha_salida', 'fecha_est_entrada', 'hora_est_entrada', 'fecha_entrada', 'hora_entrada','hora_salida','costo','costo_total','precio_especial','precio_especial_total','cliente_id','telefono_contacto','status','descripcion','status_lugar','status_comentario','herramientas','created_by','updated_by'];
+	protected $fillable  =  [
+	'folio',
+	'operador_id',
+	'servicio_id', 
+	'vehiculo_id', 
+	'vehiculo_adicional_id', 
+	'tiempo_servicio', 
+	'horas_programadas',
+	'horas_reales',
+	'fecha_salida',
+	'fecha_est_entrada',
+	'hora_est_entrada',
+	'fecha_entrada',
+	'hora_entrada',
+	'hora_salida',
+	'precio_hora',
+	'precio_total',
+	'precio_especial_hora',
+	'precio_especial_total',
+	'cliente_id',
+	'status',
+	'descripcion',
+	'status_lugar',
+	'status_comentario',
+	'herramientas',
+	'created_by',
+	'updated_by'
+	];
+
 	protected $table 		=	'tickets';
 	protected $primaryKey 	=	'id';
 
-	public function servicios()
+	public function servicio()
 	{
-			return $this->belongsToMany('Servicio');
+		return $this->belongsTo('Servicio');
 	}
 
-	public function clientes()
+	public function cliente()
 	{
-			return $this->belongsToMany('Cliente');
+		return $this->belongsTo('Cliente');
 	}
 
-	public function operadores()
+	public function operador()
 	{
-			return $this->belongsToMany('Operador');
+		return $this->belongsTo('Operador');
+	}
+
+	public function vehiculo()
+	{
+		return $this->belongsTo('Vehiculo');
+	}
+
+	public function adicional()
+	{
+		return $this->belongsTo('Adicional','vehiculo_adicional_id');
 	}
 
 }
