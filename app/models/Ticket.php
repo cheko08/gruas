@@ -1,7 +1,10 @@
 <?php
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class Ticket extends Eloquent {
 
+	use SoftDeletingTrait;
+	protected $dates = ['deleted_at'];
 	protected $fillable  =  [
 	'folio',
 	'operador_id',
@@ -36,7 +39,7 @@ class Ticket extends Eloquent {
 
 	public function servicio()
 	{
-		return $this->belongsTo('Servicio');
+		return $this->belongsTo('Servicio')->withTrashed();;
 	}
 
 	public function cliente()
@@ -46,17 +49,18 @@ class Ticket extends Eloquent {
 
 	public function operador()
 	{
-		return $this->belongsTo('Operador');
+		return $this->belongsTo('Operador')->withTrashed();
 	}
 
 	public function vehiculo()
-	{
-		return $this->belongsTo('Vehiculo');
+	{	
+		
+		return $this->belongsTo('Vehiculo')->withTrashed();
 	}
 
 	public function adicional()
 	{
-		return $this->belongsTo('Adicional','vehiculo_adicional_id');
+		return $this->belongsTo('Adicional','vehiculo_adicional_id')->withTrashed();
 	}
 
 	public function user()

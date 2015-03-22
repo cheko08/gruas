@@ -76,7 +76,7 @@ class ServiciosController extends \BaseController {
 	public function destroyServicio($id)
 	{
 
-		$tickets = Ticket::where('servicio_id',$id)->get();
+		$tickets = Ticket::where('servicio_id',$id)->where('status','Activo')->get();
 
 		if(count($tickets) > 0 )
 		{
@@ -84,7 +84,7 @@ class ServiciosController extends \BaseController {
 			->with('global-error','El servicio no puede ser borrado. Hay tickets con este servicio asignado.');
 		}
 
-		Servicio::destroy($id);
+		Servicio::find($id)->delete();
 		return Redirect::route('ver-servicio');
 	}
 

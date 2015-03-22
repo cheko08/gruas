@@ -5,11 +5,8 @@ class HomeController extends BaseController {
 
 	public function home()
 	{	
-		$servicios=DB::table('servicios')
-		->select('id','tipo')
-		->orderBy('tipo', 'ASC')
-		->groupBy('tipo')
-		->get();
+		$servicios = Servicio::all();
+		
 
 		$tickets=Ticket::where('status', '=', 'Activo')->paginate(15);
 		

@@ -183,7 +183,7 @@ class VehiculoController extends \BaseController {
 	 */
 	public function destroyVehiculo($id)
 	{
-		$tickets = Ticket::where('vehiculo_id',$id)->get();
+		$tickets = Ticket::where('vehiculo_id',$id)->where('status','Activo')->get();
 
 		if(count($tickets) > 0 )
 		{
@@ -191,7 +191,8 @@ class VehiculoController extends \BaseController {
 			->with('global-error','El Vehículo no puede ser borrado. Hay tickets con este vehículo asignado.');
 		}
 
-		Vehiculo::destroy($id);
+		$vehiculo = Vehiculo::find($id);
+		$vehiculo->delete();
 		return Redirect::route('ver-vehiculo');
 	}
 
@@ -204,7 +205,7 @@ class VehiculoController extends \BaseController {
 	 */
 	public function destroyAdicional($id)
 	{
-		$tickets = Ticket::where('vehiculo_adicional_id',$id)->get();
+		$tickets = Ticket::where('vehiculo_adicional_id',$id)->where('status','Activo')->get();
 
 		if(count($tickets) > 0 )
 		{
@@ -212,7 +213,8 @@ class VehiculoController extends \BaseController {
 			->with('global-error','El Vehículo no puede ser borrado. Hay tickets con este vehículo asignado.');
 		}
 
-		Adicional::destroy($id);
+		$adicional = Adicional::find($id);
+		$adicional->delete();
 		return Redirect::route('ver-vehiculo');
 	}
 
