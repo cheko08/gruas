@@ -258,11 +258,13 @@
 
 			@if($ticket->status === 'Cerrado' && Auth::user()->role === 'Admin')
 			<button type="submit" class="btn btn-success">Aplicar Precio Especial</button>
-			
-	{{ Form::token() }}
-
-</form>
 			@endif
+
+{{ Form::token() }}
+</form>
+<p class="text-right">{{$ticket->created_at.' / '.$ticket->user->username}}</p>
+ 
+			
 		</div>
 
 		@stop

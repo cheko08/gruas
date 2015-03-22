@@ -59,4 +59,9 @@ class Ticket extends Eloquent {
 		return $this->belongsTo('Adicional','vehiculo_adicional_id');
 	}
 
+	public function user()
+	{
+		return $this->belongsTo('User','created_by');
+	}
+
 }

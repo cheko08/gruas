@@ -9,7 +9,9 @@
 				<th>Nombre</th>
 				<th>Apellido</th>
 				<th></th>
+				@if(Auth::user()->role === 'Admin')
 				<th></th>
+				@endif
 			</tr>
 		</thead>
 		<tbody>
@@ -23,11 +25,13 @@
 				<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 				</a>
 				</td>
+				@if(Auth::user()->role === 'Admin')
 				<td>
 				<a href="{{ URL::route('operador-borrar', $operador->id) }}">
 				<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 				</a>
 				</td>
+				@endif
 			</tr>
 		@endforeach
 		</tbody>

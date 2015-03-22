@@ -11,7 +11,7 @@ class HomeController extends BaseController {
 		->groupBy('tipo')
 		->get();
 
-		$tickets=Ticket::where('status', '=', 'Activo')->get();
+		$tickets=Ticket::where('status', '=', 'Activo')->paginate(15);
 		
 		return View::make('home', array(
 			'link'	    =>	'Inicio',

@@ -34,8 +34,9 @@ Route::group(array('before' => 'auth'), function(){
 		'as'	=>	'change-password',
 		'uses'	=>	'AccountController@getChangePassword'
 		));
+Route::group(array('before' => 'tickets'), function(){
 
-	Route::get('/tickets/{tipo}', array(
+	Route::get('/tickets/crear-ticket/{tipo}', array(
 		'as'	=>	'create-ticket',
 		'uses'	=>	'TicketController@getCreateTicket'
 		));
@@ -55,10 +56,7 @@ Route::group(array('before' => 'auth'), function(){
 		'as'   =>   'operadores',
 		'uses' =>   'OperadorController@operadores'
 		));
-	Route::get('operadores/borrar/{id}', array(
-		'as'   =>  'operador-borrar',
-		'uses' =>  'OperadorController@destroyOperador'
-		));
+	
 	Route::get('operadores/actualizar/{id}', array(
 		'as'   =>  'operador-actualizar',
 		'uses' =>  'OperadorController@editOperador'
@@ -71,10 +69,7 @@ Route::group(array('before' => 'auth'), function(){
 		'as'   =>  'ver-servicio',
 		'uses' =>  'ServiciosController@servicios'
 		));
-	Route::get('servicios/servicio-borrar/{id}', array(
-		'as'   =>  'servicio-borrar',
-		'uses' =>  'ServiciosController@destroyServicio'
-		));
+	
 	Route::get('vehiculos/crear-vehiculo', array(
 		'as'   =>  'crear-vehiculo',
 		'uses' =>  'VehiculoController@createVehiculo'
@@ -83,14 +78,7 @@ Route::group(array('before' => 'auth'), function(){
 		'as'   =>  'ver-vehiculo',
 		'uses' =>  'VehiculoController@vehiculos'
 		));
-    Route::get('vehiculos/vehiculo-borrar/{id}', array(
-		'as'   =>  'vehiculo-borrar',
-		'uses' =>  'VehiculoController@destroyVehiculo'
-		));
-    Route::get('vehiculos/vehiculo-borrar-adicional/{id}', array(
-		'as'   =>  'adicional-borrar',
-		'uses' =>  'VehiculoController@destroyAdicional'
-		));
+
 	Route::get('vehiculos/vehiculo-editar/{id}', array(
 		'as'   =>  'vehiculo-editar',
 		'uses' =>  'VehiculoController@editVehiculo'
@@ -107,14 +95,22 @@ Route::group(array('before' => 'auth'), function(){
 		'as'   =>  'ticket-editar',
 		'uses' =>  'TicketController@getEditarTicket'
 		));
-	Route::get('tickets', array(
+	Route::get('tickets/ticket-cerrados', array(
 		'as'   =>  'tickets',
 		'uses' =>  'TicketController@getTicketCerrados'
+		));
+	Route::get('reportes/ver-reportes/{ticket_id}', array(
+		'as'   =>  'ver-reportes',
+		'uses' =>  'ReportesController@getVerReportes'
+		));
+	Route::get('reportes/borrar-reporte/{id}', array(
+		'as'   =>  'borrar-reporte',
+		'uses' =>  'ReportesController@borrarReporte'
 		));
 
 
 
-		Route::group(array('before' => 'csrf'), function(){
+		
 
 	/**
  		* Change password process form (POST)
@@ -164,8 +160,8 @@ Route::group(array('before' => 'auth'), function(){
  			'uses'	=>	'TicketController@postPrecioEspecial'
  			));
  	
-
- 			 	}); // end  Auth and CSRF group	
+}); // end  tickets group
+ 			
 
  	/**
 	 * Group for admin
@@ -186,6 +182,23 @@ Route::group(array('before' => 'auth'), function(){
 					'as'   =>   'cuenta-borrar',
 					'uses' =>   'AccountController@deleteCuenta'
 					));
+		 		Route::get('operadores/borrar/{id}', array(
+		            'as'   =>  'operador-borrar',
+		            'uses' =>  'OperadorController@destroyOperador'
+		            ));
+		 		Route::get('servicios/servicio-borrar/{id}', array(
+		            'as'   =>  'servicio-borrar',
+		            'uses' =>  'ServiciosController@destroyServicio'
+		            ));
+		 		   
+		 	    Route::get('vehiculos/vehiculo-borrar/{id}', array(
+		            'as'   =>  'vehiculo-borrar',
+		            'uses' =>  'VehiculoController@destroyVehiculo'
+		            ));
+                Route::get('vehiculos/vehiculo-borrar-adicional/{id}', array(
+		            'as'   =>  'adicional-borrar',
+		            'uses' =>  'VehiculoController@destroyAdicional'
+		            ));
 		 		
 
 			/**

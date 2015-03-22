@@ -29,7 +29,7 @@ public function getCreateTicket($tipo)
  */
 public function getTicketCerrados()
 {
-    $tickets=Ticket::where('status', '=', 'Cerrado')->get();
+    $tickets=Ticket::where('status', '=', 'Cerrado')->paginate(30);
 
     return View::make('tickets.cerrados', array(
         'link'      =>  'Tickets Cerrados',
@@ -84,13 +84,13 @@ public function postCreateTicket()
     
 
     //Asigna a $user el nombre de usuario
-    $user = Auth::user()->username;
+    $user = Auth::user()->id;
 
     //Asigna status Activo al ticket
     $status = "Activo";
 
     // si el campo cliente esta vacio crea un nuevo cliente.
-    if($cliente==='')
+    if($cliente =='')
     {
         $cliente = Cliente::create(array(
             'nombre'       =>    $nombre,
@@ -222,7 +222,7 @@ public function postCerrarTicket()
     $hora_entrada     = Input::get('hora_entrada');
     $precio           = Input::get('precio_hora');
     $precio_total     = Input::get('precio_total');
-    $user = Auth::user()->username;
+    $user = Auth::user()->id;
 
     $ticket = Ticket::find($id);
     $ticket->folio         = $folio;

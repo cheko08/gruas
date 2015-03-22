@@ -10,7 +10,9 @@
 			<tr>
 				<th>Tipo</th>
 				<th>Descripción</th>
+				@if(Auth::user()->role === 'Admin')
 				<th></th>
+				@endif
 
 			</tr>
 		</thead>
@@ -19,11 +21,13 @@
 			<tr>
 				<td>{{ $servicio->tipo }}</td>
 				<td>{{ $servicio->descripcion }}</td>
+				@if(Auth::user()->role === 'Admin')
 				<td>
 				<a href="{{ URL::route('servicio-borrar', $servicio->id) }}">
 				<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 				</a>
 				</td>
+				@endif
 			</tr>
 		@endforeach
 		</tbody>

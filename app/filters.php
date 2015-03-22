@@ -59,6 +59,17 @@ Route::filter('admin', function()
 });
 
 
+Route::filter('tickets', function()
+{
+	
+		if(Auth::user()->role != 'Admin' && Auth::user()->role != 'Tickets')
+		{
+			return Response::make('Unauthorized', 401);
+		}
+	
+});
+
+
 Route::filter('auth.basic', function()
 {
 	return Auth::basic();

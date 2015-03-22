@@ -1,25 +1,24 @@
 /*
-SQLyog Ultimate v11.33 (64 bit)
-MySQL - 5.6.17 : Database - gruas
-*********************************************************************
-*/
+Navicat MySQL Data Transfer
 
-/*!40101 SET NAMES utf8 */;
+Source Server         : Gruas
+Source Server Version : 50617
+Source Host           : localhost:3306
+Source Database       : gruas
 
-/*!40101 SET SQL_MODE=''*/;
+Target Server Type    : MYSQL
+Target Server Version : 50617
+File Encoding         : 65001
 
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`gruas` /*!40100 DEFAULT CHARACTER SET latin1 */;
+Date: 2015-03-22 11:26:12
+*/
 
-USE `gruas`;
+SET FOREIGN_KEY_CHECKS=0;
 
-/*Table structure for table `adicionales` */
-
+-- ----------------------------
+-- Table structure for adicionales
+-- ----------------------------
 DROP TABLE IF EXISTS `adicionales`;
-
 CREATE TABLE `adicionales` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) DEFAULT NULL,
@@ -31,14 +30,15 @@ CREATE TABLE `adicionales` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
-/*Data for the table `adicionales` */
+-- ----------------------------
+-- Records of adicionales
+-- ----------------------------
+INSERT INTO `adicionales` VALUES ('2', 'Adicional3', 'TYU-455333', 'rentado', 'E4', '2015-03-19 21:56:01', '2015-03-21 18:01:42');
 
-insert  into `adicionales`(`id`,`nombre`,`placas`,`status`,`num_economico`,`created_at`,`updated_at`) values (2,'Adicional3','TYU-455333','','E4','2015-03-19 21:56:01','2015-03-20 01:10:36');
-
-/*Table structure for table `clientes` */
-
+-- ----------------------------
+-- Table structure for clientes
+-- ----------------------------
 DROP TABLE IF EXISTS `clientes`;
-
 CREATE TABLE `clientes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) DEFAULT NULL,
@@ -50,16 +50,20 @@ CREATE TABLE `clientes` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
-/*Data for the table `clientes` */
+-- ----------------------------
+-- Records of clientes
+-- ----------------------------
+INSERT INTO `clientes` VALUES ('6', 'Test', 'Test', 'Test', 'Calle 50 por 20 y 22', '43432432423', null, '2015-03-09 02:47:45', '2015-03-09 02:47:45');
+INSERT INTO `clientes` VALUES ('7', 'Roberto', 'Pacheco', '4th source', 'Calle 60 por 53 y 55', '99494949494', null, '2015-03-09 22:42:29', '2015-03-09 22:42:29');
+INSERT INTO `clientes` VALUES ('8', 'Prueba', 'Apellido', 'Prueba', 'calle 45 x 40 y 42', '9393939393', null, '2015-03-10 19:34:18', '2015-03-10 19:34:18');
+INSERT INTO `clientes` VALUES ('11', 'John', 'Doe', 'Lenovo', 'calle 45 x 40 y 42', '403939303', null, '2015-03-21 17:07:31', '2015-03-21 17:07:31');
 
-insert  into `clientes`(`id`,`nombre`,`apellidos`,`empresa`,`direccion`,`telefono`,`notas`,`created_at`,`updated_at`) values (6,'Test','Test','Test','Calle 50 por 20 y 22','43432432423',NULL,'2015-03-09 02:47:45','2015-03-09 02:47:45'),(7,'Roberto','Pacheco','4th source','Calle 60 por 53 y 55','99494949494',NULL,'2015-03-09 22:42:29','2015-03-09 22:42:29'),(8,'Prueba','Apellido','Prueba','calle 45 x 40 y 42','9393939393',NULL,'2015-03-10 19:34:18','2015-03-10 19:34:18'),(9,'','','','','',NULL,'2015-03-17 00:05:16','2015-03-17 00:05:16'),(10,'','','','','',NULL,'2015-03-19 19:18:49','2015-03-19 19:18:49');
-
-/*Table structure for table `operadores` */
-
+-- ----------------------------
+-- Table structure for operadores
+-- ----------------------------
 DROP TABLE IF EXISTS `operadores`;
-
 CREATE TABLE `operadores` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `referencia` varchar(10) DEFAULT NULL,
@@ -70,33 +74,39 @@ CREATE TABLE `operadores` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
-/*Data for the table `operadores` */
+-- ----------------------------
+-- Records of operadores
+-- ----------------------------
+INSERT INTO `operadores` VALUES ('6', 'L', 'Pedro', 'Hernandez', '2015-03-08 00:39:14', '2015-03-19 21:23:49');
+INSERT INTO `operadores` VALUES ('7', 'E', 'Miguel', 'Suarez', '2015-03-08 01:20:39', '2015-03-19 21:24:04');
+INSERT INTO `operadores` VALUES ('13', 'J', 'Juan', 'Perez', '2015-03-19 21:23:26', '2015-03-19 21:23:26');
 
-insert  into `operadores`(`id`,`referencia`,`nombre`,`apellido`,`created_at`,`updated_at`) values (6,'L','Pedro','Hernandez','2015-03-08 00:39:14','2015-03-19 21:23:49'),(7,'E','Miguel','Suarez','2015-03-08 01:20:39','2015-03-19 21:24:04'),(12,'T','Roberto','Pacheco','2015-03-19 21:23:10','2015-03-19 21:23:10'),(13,'J','Juan','Perez','2015-03-19 21:23:26','2015-03-19 21:23:26');
-
-/*Table structure for table `reportes` */
-
+-- ----------------------------
+-- Table structure for reportes
+-- ----------------------------
 DROP TABLE IF EXISTS `reportes`;
-
 CREATE TABLE `reportes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ticket_id` int(11) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
   `horas` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
-  `created_by` varchar(100) DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
-/*Data for the table `reportes` */
+-- ----------------------------
+-- Records of reportes
+-- ----------------------------
+INSERT INTO `reportes` VALUES ('13', '70', '2015-03-22', '8', '2015-03-21 16:26:44', '19', '2015-03-21 16:26:44');
+INSERT INTO `reportes` VALUES ('15', '71', '2015-03-21', '2', '2015-03-21 16:43:52', '19', '2015-03-21 16:43:52');
+INSERT INTO `reportes` VALUES ('17', '74', '2015-03-21', '1', '2015-03-21 18:02:36', '19', '2015-03-21 18:02:36');
 
-insert  into `reportes`(`id`,`ticket_id`,`fecha`,`horas`,`created_at`,`created_by`,`updated_at`) values (6,51,'2015-03-15',2,'2015-03-15 18:51:04',NULL,'2015-03-15 18:51:04'),(7,51,'2015-03-16',3,'2015-03-15 18:52:50',NULL,'2015-03-15 18:52:50'),(8,51,'2015-03-16',3,'2015-03-15 19:38:56',NULL,'2015-03-15 19:38:56'),(9,55,'2015-03-17',1,'2015-03-17 00:14:26',NULL,'2015-03-17 00:14:26'),(10,57,'2015-03-17',3,'2015-03-17 18:51:23',NULL,'2015-03-17 18:51:23'),(11,60,'2015-03-17',10,'2015-03-17 19:25:01',NULL,'2015-03-17 19:25:01');
-
-/*Table structure for table `servicios` */
-
+-- ----------------------------
+-- Table structure for servicios
+-- ----------------------------
 DROP TABLE IF EXISTS `servicios`;
-
 CREATE TABLE `servicios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tipo` varchar(100) NOT NULL,
@@ -106,16 +116,22 @@ CREATE TABLE `servicios` (
   `updated_at` datetime DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
-/*Data for the table `servicios` */
+-- ----------------------------
+-- Records of servicios
+-- ----------------------------
+INSERT INTO `servicios` VALUES ('5', 'Grúa tipo A', null, 'Grúa tipo A', null, '2015-03-08 23:18:26', '2015-03-08 23:18:26');
+INSERT INTO `servicios` VALUES ('6', 'Grúa tipo B', null, 'Grúas', null, '2015-03-08 23:21:46', '2015-03-08 23:21:46');
+INSERT INTO `servicios` VALUES ('8', 'Maquinaria Ligera', null, 'Renta de maquinaria', null, '2015-03-08 23:22:22', '2015-03-08 23:22:22');
+INSERT INTO `servicios` VALUES ('9', 'Utilitarios', null, 'Vehiculos utilitarios', null, '2015-03-08 23:22:42', '2015-03-08 23:22:42');
+INSERT INTO `servicios` VALUES ('11', 'Lowboy', null, 'Renta de Lowboy', null, '2015-03-08 23:23:06', '2015-03-08 23:23:06');
+INSERT INTO `servicios` VALUES ('12', 'Grúa tipo C', null, 'Grúas', null, '2015-03-08 23:50:45', '2015-03-08 23:50:45');
 
-insert  into `servicios`(`id`,`tipo`,`nombre`,`descripcion`,`status`,`updated_at`,`created_at`) values (5,'Grúa tipo A',NULL,'Grúa tipo A',NULL,'2015-03-08 23:18:26','2015-03-08 23:18:26'),(6,'Grúa tipo B',NULL,'Grúas',NULL,'2015-03-08 23:21:46','2015-03-08 23:21:46'),(8,'Maquinaria Ligera',NULL,'Renta de maquinaria',NULL,'2015-03-08 23:22:22','2015-03-08 23:22:22'),(9,'Utilitarios',NULL,'Vehiculos utilitarios',NULL,'2015-03-08 23:22:42','2015-03-08 23:22:42'),(11,'Lowboy',NULL,'Renta de Lowboy',NULL,'2015-03-08 23:23:06','2015-03-08 23:23:06'),(12,'Grúa tipo C',NULL,'Grúas',NULL,'2015-03-08 23:50:45','2015-03-08 23:50:45');
-
-/*Table structure for table `tickets` */
-
+-- ----------------------------
+-- Table structure for tickets
+-- ----------------------------
 DROP TABLE IF EXISTS `tickets`;
-
 CREATE TABLE `tickets` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `folio` varchar(20) NOT NULL,
@@ -141,22 +157,34 @@ CREATE TABLE `tickets` (
   `descripcion` text,
   `status_lugar` varchar(100) NOT NULL,
   `status_comentarios` text,
-  `created_by` varchar(100) NOT NULL,
+  `created_by` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_by` varchar(100) NOT NULL,
+  `updated_by` int(11) NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `operadores` (`operador_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=latin1;
 
-/*Data for the table `tickets` */
+-- ----------------------------
+-- Records of tickets
+-- ----------------------------
+INSERT INTO `tickets` VALUES ('68', '00007', '6', '11', '10', '2', 'hora', '1', '1', '2015-03-20', '2015-03-20', '2015-03-20', '12:30:00', '10:00:00', '12:00:00', '200', '200', '100', '100', '7', 'Cerrado', 'test', 'dentro', null, '19', '2015-03-20 00:39:42', '19', '2015-03-20 01:14:36');
+INSERT INTO `tickets` VALUES ('69', '00007', '6', '11', '10', '2', 'hora', '2', '2', '2015-03-20', '2015-03-20', '2015-03-20', '12:00:00', '12:00:00', '22:10:00', '200', '400', null, null, '7', 'Cerrado', 'test', 'dentro', null, '19', '2015-03-20 01:01:41', '19', '2015-03-20 01:10:36');
+INSERT INTO `tickets` VALUES ('70', '', '7', '5', '6', null, 'hora', '20', '8', '2015-03-20', '2015-03-20', null, '12:00:00', null, '13:00:00', null, null, null, null, '8', 'Activo', 'test', 'dentro', null, '19', '2015-03-20 01:11:11', '19', '2015-03-21 18:39:25');
+INSERT INTO `tickets` VALUES ('71', '00008', '7', '5', '13', null, 'hora', '2', '2', '2015-03-20', '2015-03-20', '2015-03-22', '12:00:00', '22:00:00', '22:00:00', '300', '600', null, null, '8', 'Cerrado', 'test', 'dentro', null, '19', '2015-03-20 01:13:45', '20', '2015-03-22 11:06:01');
+INSERT INTO `tickets` VALUES ('72', '', '6', '5', '6', null, 'hora', '1', null, '2015-03-21', '2015-03-21', null, '10:00:00', null, '09:00:00', null, null, null, null, '6', 'Activo', 'test', 'dentro', null, '19', '2015-03-21 17:06:25', '19', '2015-03-21 17:06:25');
+INSERT INTO `tickets` VALUES ('73', '', '13', '5', '13', null, 'hora', '4', null, '2015-03-22', '2015-03-22', null, '16:00:00', null, '12:00:00', null, null, null, null, '11', 'Activo', 'test', 'dentro', null, '19', '2015-03-21 17:07:31', '19', '2015-03-21 17:07:31');
+INSERT INTO `tickets` VALUES ('74', '', '6', '11', '10', '2', 'hora', '1', '1', '2015-03-21', '2015-03-21', null, '15:00:00', null, '14:00:00', null, null, null, null, '6', 'Activo', '', 'dentro', null, '19', '2015-03-21 18:01:42', '19', '2015-03-21 18:02:36');
+INSERT INTO `tickets` VALUES ('75', '', '6', '8', '12', null, 'hora', '1', null, '2015-03-22', '2015-03-22', null, '10:00:00', null, '21:00:00', null, null, null, null, '7', 'Activo', '', 'dentro', null, '19', '2015-03-22 00:44:58', '19', '2015-03-22 00:44:58');
+INSERT INTO `tickets` VALUES ('76', '', '6', '6', '14', null, 'hora', '2', null, '2015-03-22', '2015-03-22', null, '17:40:00', null, '15:40:00', null, null, null, null, '7', 'Activo', '', 'dentro', null, '19', '2015-03-22 00:45:52', '19', '2015-03-22 00:45:52');
+INSERT INTO `tickets` VALUES ('77', '', '13', '11', '10', '2', 'hora', '35', null, '2015-03-22', '2015-03-22', null, '06:00:00', null, '16:00:00', null, null, null, null, '7', 'Activo', '', 'dentro', null, '19', '2015-03-22 00:46:39', '19', '2015-03-22 00:46:39');
+INSERT INTO `tickets` VALUES ('78', '', '7', '12', '15', null, 'quincena', '3', null, '2015-03-22', '2015-03-22', null, '14:00:00', null, '15:00:00', null, null, null, null, '11', 'Activo', 'test', 'dentro', null, '19', '2015-03-22 00:47:42', '19', '2015-03-22 00:47:42');
+INSERT INTO `tickets` VALUES ('79', '', '13', '9', '11', null, 'hora', '2', null, '2015-03-22', '2015-03-22', null, '12:00:00', null, '10:00:00', null, null, null, null, '6', 'Activo', 'test', 'dentro', null, '19', '2015-03-22 10:27:43', '19', '2015-03-22 10:27:43');
 
-insert  into `tickets`(`id`,`folio`,`operador_id`,`servicio_id`,`vehiculo_id`,`vehiculo_adicional_id`,`tiempo_servicio`,`horas_programadas`,`horas_reales`,`fecha_salida`,`fecha_est_entrada`,`fecha_entrada`,`hora_est_entrada`,`hora_entrada`,`hora_salida`,`precio_hora`,`precio_total`,`precio_especial_hora`,`precio_especial_total`,`cliente_id`,`status`,`descripcion`,`status_lugar`,`status_comentarios`,`created_by`,`created_at`,`updated_by`,`updated_at`) values (68,'00007',6,11,10,2,'hora',1,1,'2015-03-20','2015-03-20','2015-03-20','12:30:00','10:00:00','12:00:00',200,200,100,100,7,'Cerrado','test','dentro',NULL,'test1','2015-03-20 00:39:42','test1','2015-03-20 01:14:36'),(69,'00007',6,11,10,2,'hora',2,2,'2015-03-20','2015-03-20','2015-03-20','12:00:00','12:00:00','22:10:00',200,400,NULL,NULL,7,'Cerrado','test','dentro',NULL,'test1','2015-03-20 01:01:41','test1','2015-03-20 01:10:36'),(70,'',7,5,6,NULL,'hora',2,NULL,'2015-03-20','2015-03-20',NULL,'12:00:00',NULL,'22:00:00',NULL,NULL,NULL,NULL,8,'Activo','test','dentro',NULL,'test1','2015-03-20 01:11:11','test1','2015-03-20 01:11:11'),(71,'',7,5,13,NULL,'hora',2,NULL,'2015-03-20','2015-03-20',NULL,'12:00:00',NULL,'22:00:00',NULL,NULL,NULL,NULL,8,'Activo','test','dentro',NULL,'test1','2015-03-20 01:13:45','test1','2015-03-20 01:14:05');
-
-/*Table structure for table `users` */
-
+-- ----------------------------
+-- Table structure for users
+-- ----------------------------
 DROP TABLE IF EXISTS `users`;
-
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(180) DEFAULT NULL,
@@ -174,14 +202,18 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
-/*Data for the table `users` */
+-- ----------------------------
+-- Records of users
+-- ----------------------------
+INSERT INTO `users` VALUES ('19', 'test1', null, '$2y$10$IE8nx8r7qRISK0Go/7dvsOCi4UkWxqpXOmX1GqeR4IZSNgWK.ZBrq', null, 'Roberto', 'Pacheco', 'Admin', '1', null, 'E0D6u05YIo9aeSm3liWjXZESW9K9Sm6kfhkE0tPSpjK6yR1tVz8qShUsL8uX', '2015-03-08 01:15:24', '2015-03-22 10:57:52');
+INSERT INTO `users` VALUES ('20', 'tickets', null, '$2y$10$F83vVG7dkSDy5q2r/bwUgOHOu4LvjDIXXgwtJK8DfWpJu.UwX7T3.', null, 'Test', 'Test', 'Tickets', '1', null, 'eRtGI9AG2QvFI2GfjFSRuF6tqNY8AhMTHSyRfSR9d6BkrLkH2mFQ9GZ4wamW', '2015-03-08 01:18:54', '2015-03-21 17:35:13');
+INSERT INTO `users` VALUES ('21', 'almacen', null, '$2y$10$545pZ5DYCzgysxQQLjiufuK3aW3JYHuUOc93CgC8un2uCEdizLQ0G', null, 'Almacen', 'Almacen', 'Almacen', '1', null, 'dJFFqrkMjTyMBcuCZiDZTt1SiIdHlELBjVvOFb7GjpYj08E9HA6qERmhiee6', '2015-03-08 01:19:18', '2015-03-22 11:01:40');
+INSERT INTO `users` VALUES ('22', 'usuario', null, '$2y$10$Gw7XFF/wDM3g6gEfI5lMB.fSU0kITVaAOJRAUwtZgoyFaIzTAz2vq', null, 'usuario', 'usuario', 'Tickets', '1', null, 'M1hciL0m1CjPpvCTLtrjBdKBiHuwtBF7lfXLVnpRr9vTuo23rEfQCtjbAHw9', '2015-03-17 18:43:49', '2015-03-17 19:06:44');
 
-insert  into `users`(`id`,`username`,`email`,`password`,`password_temp`,`first_name`,`last_name`,`role`,`active`,`code`,`remember_token`,`created_at`,`updated_at`) values (19,'test1',NULL,'$2y$10$IE8nx8r7qRISK0Go/7dvsOCi4UkWxqpXOmX1GqeR4IZSNgWK.ZBrq',NULL,'Roberto','Pacheco','Admin',1,NULL,'bOWYT3Llv54CuRAR5KD0P02foENW2t3eciLp9eXciY2sQz4SnKiWFCbI04rs','2015-03-08 01:15:24','2015-03-17 19:20:57'),(20,'tickets',NULL,'$2y$10$F83vVG7dkSDy5q2r/bwUgOHOu4LvjDIXXgwtJK8DfWpJu.UwX7T3.',NULL,'Test','Test','Tickets',1,NULL,NULL,'2015-03-08 01:18:54','2015-03-08 01:18:54'),(21,'Almacen',NULL,'$2y$10$545pZ5DYCzgysxQQLjiufuK3aW3JYHuUOc93CgC8un2uCEdizLQ0G',NULL,'Almacen','Almacen','Almacen',1,NULL,NULL,'2015-03-08 01:19:18','2015-03-08 01:19:18'),(22,'usuario',NULL,'$2y$10$Gw7XFF/wDM3g6gEfI5lMB.fSU0kITVaAOJRAUwtZgoyFaIzTAz2vq',NULL,'usuario','usuario','Tickets',1,NULL,'M1hciL0m1CjPpvCTLtrjBdKBiHuwtBF7lfXLVnpRr9vTuo23rEfQCtjbAHw9','2015-03-17 18:43:49','2015-03-17 19:06:44');
-
-/*Table structure for table `vehiculos` */
-
+-- ----------------------------
+-- Table structure for vehiculos
+-- ----------------------------
 DROP TABLE IF EXISTS `vehiculos`;
-
 CREATE TABLE `vehiculos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(200) DEFAULT NULL,
@@ -192,13 +224,15 @@ CREATE TABLE `vehiculos` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
-/*Data for the table `vehiculos` */
-
-insert  into `vehiculos`(`id`,`nombre`,`servicio_id`,`placas`,`num_economico`,`status`,`created_at`,`updated_at`) values (6,'Grua 10 toneladas',5,'GTY-33454','A6','rentado','2015-03-10 18:48:14','2015-03-20 01:11:11'),(10,'Lowboy2',11,'YHJ-45642','T6','','2015-03-17 15:29:17','2015-03-20 01:10:36'),(11,'Bobcat',9,'HYU-434324','B7','','2015-03-19 22:42:11','2015-03-19 22:42:11'),(12,'Maquinaria1',8,'RTY-43243','Y6','','2015-03-19 22:45:10','2015-03-19 22:45:10'),(13,'Grua 15 toneladas',5,'RYU-34532','T5','rentado','2015-03-20 00:32:37','2015-03-20 01:14:05');
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+-- ----------------------------
+-- Records of vehiculos
+-- ----------------------------
+INSERT INTO `vehiculos` VALUES ('6', 'Grua 10 toneladas', '5', 'GTY-33454', 'A6', 'rentado', '2015-03-10 18:48:14', '2015-03-21 16:39:59');
+INSERT INTO `vehiculos` VALUES ('10', 'Lowboy2', '11', 'YHJ-45642', 'T6', 'rentado', '2015-03-17 15:29:17', '2015-03-21 18:01:42');
+INSERT INTO `vehiculos` VALUES ('11', 'Bobcat', '9', 'HYU-434324', 'B7', 'rentado', '2015-03-19 22:42:11', '2015-03-22 10:27:43');
+INSERT INTO `vehiculos` VALUES ('12', 'Maquinaria1', '8', 'RTY-43243', 'Y6', 'rentado', '2015-03-19 22:45:10', '2015-03-22 00:44:58');
+INSERT INTO `vehiculos` VALUES ('13', 'Grua 15 toneladas', '5', 'RYU-34532', 'T5', 'rentado', '2015-03-20 00:32:37', '2015-03-20 01:14:05');
+INSERT INTO `vehiculos` VALUES ('14', 'Grúa 5 toneladas', '6', 'TYH-49493', 'E3', 'rentado', '2015-03-21 18:08:27', '2015-03-22 00:45:52');
+INSERT INTO `vehiculos` VALUES ('15', 'Grua 50 tons', '12', 'KEL-3243', 'H6', 'rentado', '2015-03-22 00:47:16', '2015-03-22 00:47:42');

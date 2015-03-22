@@ -31,7 +31,7 @@
 				
 			<div class="form-group">
 				<label>Vehículo</label>
-				<select class="form-control" name="vehiculo">
+				<select class="form-control" name="vehiculo" required>
 					@foreach($vehiculos as $vehiculo)
 					<option value="{{ $vehiculo->id }}">{{$vehiculo->num_economico.' - '. $vehiculo->nombre }}</option>
 					@endforeach
@@ -40,8 +40,7 @@
 			@if($servicio->id == 11)
 			<div class="form-group">
 				<label>Adicional</label>
-				<select class="form-control" name="vehiculo_adicional">
-					<option value=""></option>}
+				<select class="form-control" name="vehiculo_adicional" required>
 					@foreach($vehiculos_a as $vehiculo)
 					<option value="{{ $vehiculo->id }}">{{ $vehiculo->nombre }}</option>
 					@endforeach
@@ -100,13 +99,13 @@
 				<div class="col-xs-6">
 					<div class="form-group">
 						<label>Fecha de salida </label>
-						<input id="date" type="date" class="form-control" name="fecha">
+						<input id="date" type="date" class="form-control" name="fecha" required>
 					</div>
 				</div>
 				<div class="col-xs-6">
 					<div class="form-group">
 						<label>Hora de salida</label>
-						<input id="time" type="time" class="form-control" name="hora">
+						<input id="time" type="time" class="form-control" name="hora" required>
 					</div>
 				</div>
 			</div>

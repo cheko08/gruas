@@ -53,12 +53,14 @@ class ReportesController extends \BaseController {
 
 		
 		$fecha = Input::get('fecha');
-		$hora = Input::get('horas');
+		$hora  = Input::get('horas');
+		$user  = Auth::user()->id;
 
 		$reporte = Reporte::create(array(
-			'ticket_id' => $ticket_id,
-			'fecha'     => $fecha,
-			'horas'      => $hora
+			'ticket_id'  => $ticket_id,
+			'fecha'      => $fecha,
+			'horas'      => $hora,
+			'created_by' => $user
 			));
 
 		if($reporte)
@@ -83,35 +85,18 @@ class ReportesController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function getVerReportes($ticket_id)
 	{
-		//
+		$reportes = Reporte::where('ticket_id', $ticket_id)->get();
+		$ticket   = Ticket::find($ticket_id);
+
+		return View::make('reportes.ver-reportes', array(
+			'link'       =>   'Ver Reportes',
+			'ticket_id'  =>   $ticket_id,
+			'reportes'   =>   $reportes,
+			'ticket'     =>   $ticket
+			));
 	}
-
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
 
 	/**
 	 * Remove the specified resource from storage.
@@ -119,9 +104,18 @@ class ReportesController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function borrarReporte($id)
 	{
-		//
+		$reporte   = Reporte::find($id);
+		$ticket_id = $reporte->ticket_id;
+
+		$ticket = Ticket::find($ticket_id);
+		$ticket->horas_reales = $ticket->horas_reales - $reporte->horas;
+		$ticket->save();
+
+		Reporte::destroy($id);
+
+		return Redirect::route('ver-reportes', $ticket_id);
 	}
 
 
