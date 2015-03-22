@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2015-03-22 17:00:56
+Date: 2015-03-22 17:06:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -207,16 +207,17 @@ CREATE TABLE `users` (
   `remember_token` varchar(300) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
+  `deleted_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('19', 'test1', null, '$2y$10$IE8nx8r7qRISK0Go/7dvsOCi4UkWxqpXOmX1GqeR4IZSNgWK.ZBrq', null, 'Roberto', 'Pacheco', 'Admin', '1', null, 'E0D6u05YIo9aeSm3liWjXZESW9K9Sm6kfhkE0tPSpjK6yR1tVz8qShUsL8uX', '2015-03-08 01:15:24', '2015-03-22 10:57:52');
-INSERT INTO `users` VALUES ('20', 'tickets', null, '$2y$10$F83vVG7dkSDy5q2r/bwUgOHOu4LvjDIXXgwtJK8DfWpJu.UwX7T3.', null, 'Test', 'Test', 'Tickets', '1', null, 'bTonzcjcfjUEi2n34rDjucU5LktOBh3ie9bHFc6VLLDvXVS4s5axccwe2rdp', '2015-03-08 01:18:54', '2015-03-22 16:13:40');
-INSERT INTO `users` VALUES ('21', 'almacen', null, '$2y$10$545pZ5DYCzgysxQQLjiufuK3aW3JYHuUOc93CgC8un2uCEdizLQ0G', null, 'Almacen', 'Almacen', 'Almacen', '1', null, 'dJFFqrkMjTyMBcuCZiDZTt1SiIdHlELBjVvOFb7GjpYj08E9HA6qERmhiee6', '2015-03-08 01:19:18', '2015-03-22 11:01:40');
-INSERT INTO `users` VALUES ('22', 'usuario', null, '$2y$10$Gw7XFF/wDM3g6gEfI5lMB.fSU0kITVaAOJRAUwtZgoyFaIzTAz2vq', null, 'usuario', 'usuario', 'Tickets', '1', null, 'M1hciL0m1CjPpvCTLtrjBdKBiHuwtBF7lfXLVnpRr9vTuo23rEfQCtjbAHw9', '2015-03-17 18:43:49', '2015-03-17 19:06:44');
+INSERT INTO `users` VALUES ('19', 'test1', null, '$2y$10$IE8nx8r7qRISK0Go/7dvsOCi4UkWxqpXOmX1GqeR4IZSNgWK.ZBrq', null, 'Roberto', 'Pacheco', 'Admin', '1', null, 'E0D6u05YIo9aeSm3liWjXZESW9K9Sm6kfhkE0tPSpjK6yR1tVz8qShUsL8uX', '2015-03-08 01:15:24', '2015-03-22 10:57:52', null);
+INSERT INTO `users` VALUES ('20', 'tickets', null, '$2y$10$F83vVG7dkSDy5q2r/bwUgOHOu4LvjDIXXgwtJK8DfWpJu.UwX7T3.', null, 'Test', 'Test', 'Tickets', '1', null, 'bTonzcjcfjUEi2n34rDjucU5LktOBh3ie9bHFc6VLLDvXVS4s5axccwe2rdp', '2015-03-08 01:18:54', '2015-03-22 16:13:40', null);
+INSERT INTO `users` VALUES ('21', 'almacen', null, '$2y$10$545pZ5DYCzgysxQQLjiufuK3aW3JYHuUOc93CgC8un2uCEdizLQ0G', null, 'Almacen', 'Almacen', 'Almacen', '1', null, 'dJFFqrkMjTyMBcuCZiDZTt1SiIdHlELBjVvOFb7GjpYj08E9HA6qERmhiee6', '2015-03-08 01:19:18', '2015-03-22 11:01:40', null);
+INSERT INTO `users` VALUES ('22', 'usuario', null, '$2y$10$Gw7XFF/wDM3g6gEfI5lMB.fSU0kITVaAOJRAUwtZgoyFaIzTAz2vq', null, 'usuario', 'usuario', 'Tickets', '1', null, 'M1hciL0m1CjPpvCTLtrjBdKBiHuwtBF7lfXLVnpRr9vTuo23rEfQCtjbAHw9', '2015-03-17 18:43:49', '2015-03-17 19:06:44', null);
 
 -- ----------------------------
 -- Table structure for vehiculos

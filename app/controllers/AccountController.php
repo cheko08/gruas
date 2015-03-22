@@ -199,7 +199,7 @@ class AccountController extends BaseController
 
     public function deleteCuenta($id)
     {
-      User::destroy($id);
+      User::find($id)->delete();
       return Redirect::route('cuentas');
     }
 

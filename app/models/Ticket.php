@@ -39,7 +39,7 @@ class Ticket extends Eloquent {
 
 	public function servicio()
 	{
-		return $this->belongsTo('Servicio')->withTrashed();;
+		return $this->belongsTo('Servicio')->withTrashed();
 	}
 
 	public function cliente()
@@ -65,7 +65,7 @@ class Ticket extends Eloquent {
 
 	public function user()
 	{
-		return $this->belongsTo('User','created_by');
+		return $this->belongsTo('User','created_by')->withTrashed();;
 	}
 
 }
