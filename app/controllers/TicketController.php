@@ -29,7 +29,8 @@ public function getCreateTicket($tipo)
  */
 public function getTicketCerrados()
 {
-    $tickets=Ticket::where('status', '=', 'Cerrado')->paginate(30);
+    $tickets=Ticket::with('cliente','vehiculo','adicional','operador')
+    ->where('status', '=', 'Cerrado')->paginate(30);
 
     return View::make('tickets.cerrados', array(
         'link'      =>  'Tickets Cerrados',
@@ -222,6 +223,7 @@ public function postCerrarTicket()
     $hora_entrada     = Input::get('hora_entrada');
     $precio           = Input::get('precio_hora');
     $precio_total     = Input::get('precio_total');
+    $comments         = Input::get('comments');
     $user = Auth::user()->id;
 
     $ticket = Ticket::find($id);
@@ -232,6 +234,7 @@ public function postCerrarTicket()
     $ticket->status        = "Cerrado";
     $ticket->precio_hora   = $precio;
     $ticket->precio_total  = $precio_total;
+    $ticket->descripcion   = $comments;
     $ticket->updated_by    = $user;
     $ticket->save();
 

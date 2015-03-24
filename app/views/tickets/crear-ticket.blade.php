@@ -51,9 +51,12 @@
 				<label>Cliente</label>
 				<select class="form-control" name="cliente" id="ex-client">
 					<option value=""></option>
+						
 					@foreach($clientes as $cliente)
 					<option value="{{ $cliente->id }}">{{ $cliente->nombre.' '.$cliente->apellidos.' - '.$cliente->empresa }}</option>
 					@endforeach
+
+
 				</select>
 			</div>
 

@@ -69,6 +69,17 @@ Route::filter('tickets', function()
 	
 });
 
+Route::filter('almacen', function()
+{
+	
+		if(Auth::user()->role != 'Admin' && Auth::user()->role != 'Almacen')
+		{
+			return Response::make('Unauthorized', 401);
+		}
+		
+	
+});
+
 
 Route::filter('auth.basic', function()
 {

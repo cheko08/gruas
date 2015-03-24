@@ -230,7 +230,7 @@
 
 					<div class="form-group">
 						<label for="Comentarios">Notas Adicionales</label>
-						<textarea name="comments" readonly rows="3" class="form-control">{{ $ticket->descripcion }}</textarea>
+						<textarea name="comments"  rows="3" class="form-control">{{ $ticket->descripcion }}</textarea>
 					</div>
 				</div>
 				<input type="submit" value="Cerrar Ticket" class="btn btn-primary">

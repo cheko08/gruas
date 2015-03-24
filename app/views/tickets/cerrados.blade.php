@@ -13,7 +13,7 @@
 				<th>Horas estimadas</th>
 				<th>Cliente</th>
 				<th>Operador</th>
-				<th>Servicio y vehículo</th>
+				<th>Vehículo</th>
 				
 			</tr>
 		</thead>
@@ -24,9 +24,9 @@
 				<td>{{ date("d/m/Y",strtotime($ticket->fecha_salida))}}</td>
 				<td>{{ $ticket->hora_salida }}</td>
 				<td>{{ $ticket->horas_programadas }}</td>
-				<td>{{ $ticket->cliente->nombre." ".$ticket->cliente->apellidos }}</td>
-				<td>{{ $ticket->operador->referencia."-".$ticket->operador->nombre." ".$ticket->operador->apellido }}</td>
-				<td>{{ $ticket->servicio->tipo." - ".$ticket->vehiculo->nombre}}</td>
+				<td>{{ $ticket->cliente->nombre.' '.$ticket->cliente->apellidos }}</td>
+				<td>{{ $ticket->operador->referencia.' - '.$ticket->operador->nombre." ".$ticket->operador->apellido }}</td>
+				<td>{{$ticket->vehiculo->num_economico.' - '.$ticket->vehiculo->nombre}}</td>
 			</tr>
 
 			@endforeach

@@ -8,7 +8,8 @@ class HomeController extends BaseController {
 		$servicios = Servicio::all();
 		
 
-		$tickets=Ticket::where('status', '=', 'Activo')->paginate(15);
+		$tickets=Ticket::with('cliente','vehiculo','adicional','operador')
+    ->where('status', '=', 'Activo')->paginate(15);
 		
 		return View::make('home', array(
 			'link'	    =>	'Inicio',

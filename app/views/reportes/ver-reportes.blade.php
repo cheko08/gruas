@@ -7,6 +7,7 @@
 <p>Horas estimadas: {{ $ticket->horas_programadas}}</p>
 
 
+
 <table class="table table-striped table-condensed">
 	<thead>
 		<tr>
@@ -38,6 +39,7 @@
 	</tr>
 	</tbody>
 </table>
+<p class="text-right"><a href="{{ URL::route('excel-reportes', $ticket_id) }}" class="btn btn-success btn-xs active" role="button">Exportar a Excel</a></p>
 </div>
 
 

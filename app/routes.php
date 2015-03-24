@@ -27,6 +27,9 @@ Route::group(array('before' => 'auth'), function(){
 		'as'	=>	'home',
 		'uses'	=>	'HomeController@home'
 		));
+	
+
+
 	/**
 	* Change password view form (GET)
 	*/
@@ -108,7 +111,10 @@ Route::group(array('before' => 'tickets'), function(){
 		'uses' =>  'ReportesController@borrarReporte'
 		));
 
-
+	Route::get('/excel/excel-reportes/{ticket_id}', array(
+		'as'	=>	'excel-reportes',
+		'uses'	=>	'ExcelController@excelReportes'
+		));
 
 		
 
@@ -217,7 +223,18 @@ Route::group(array('before' => 'tickets'), function(){
 
 	 	}); // end  admin and CSRF group	
 
-	});//end for admin group 		
+	});//end for admin group 
+
+
+	Route::group(array('before' => 'almacen'), function(){
+
+
+		Route::get('/almacen', array(
+			'as'   =>  'almacen',
+			'uses' =>  'AlmacenController@index'
+			));
+
+	});//end group almacen		
 
  	}); //end auth group
 
