@@ -28,7 +28,8 @@ class Ticket extends Eloquent {
 	'status',
 	'descripcion',
 	'status_lugar',
-	'status_comentario',
+	'almacen',
+	'status_comentarios',
 	'herramientas',
 	'created_by',
 	'updated_by'

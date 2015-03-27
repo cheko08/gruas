@@ -35,7 +35,7 @@
 			</div>
 			<div class="checkbox">
 				<label for="remember">
-				<input type="checkbox" name="remember"> No cerrar mi sesión!
+				<input type="checkbox" name="remember"> No cerrar mi sesión.
 				</label>
 			</div>
 			<div class="form-group">

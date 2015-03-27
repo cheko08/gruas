@@ -15,11 +15,14 @@
 		@endif
 		@if(Session::has('create-error'))
 
+	
+
 		<div class="alert alert-danger alert-dismissable">
 			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 			{{ Session::get('create-error') }}
 		</div>
 		@endif
+
 
 		<form method="post" action="{{URL::route('post-create-ticket')}}">
 			<div class="form-group">
@@ -102,13 +105,13 @@
 				<div class="col-xs-6">
 					<div class="form-group">
 						<label>Fecha de salida </label>
-						<input id="date" type="date" class="form-control" name="fecha" required>
+						<input id="date" type="date" class="form-control" name="fecha" >
 					</div>
 				</div>
 				<div class="col-xs-6">
 					<div class="form-group">
 						<label>Hora de salida</label>
-						<input id="time" type="time" class="form-control" name="hora" required>
+						<input id="time" type="time" class="form-control" name="hora" >
 					</div>
 				</div>
 			</div>

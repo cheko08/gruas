@@ -45,3 +45,13 @@ body{
 	padding-top: 0;
 }
 
+table thead tr{
+	background-color: #3366CC;
+	color: #fff;
+
+}
+
+.servicios{
+	margin-bottom: 10px;
+}
+

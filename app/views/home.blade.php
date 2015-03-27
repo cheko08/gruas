@@ -15,7 +15,7 @@
 
 		@foreach($servicios as $servicio)
 
-		<a class="btn btn-primary btn-lg" href="{{ URL::route('create-ticket',$servicio->id) }}" role="button">{{ $servicio->tipo }}</a>
+		<a class="btn btn-primary btn-lg servicios" href="{{ URL::route('create-ticket',$servicio->id) }}" role="button">{{ $servicio->tipo }}</a>
 
 		@endforeach
 
@@ -28,7 +28,7 @@
 
 <div class="container">
 	<h1>Tickets abiertos</h1>
-	<table class="table table-striped table-condensed">
+	<table class="table table-striped table-responsive">
 		<thead>
 			<tr>
 				

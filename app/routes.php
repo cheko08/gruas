@@ -233,6 +233,24 @@ Route::group(array('before' => 'tickets'), function(){
 			'as'   =>  'almacen',
 			'uses' =>  'AlmacenController@index'
 			));
+		Route::get('/almacen/salida-herramientas/{ticket_id}', array(
+			'as'   =>  'salida-herramientas',
+			'uses' =>  'AlmacenController@getSalida'
+			));
+		Route::get('/almacen/entrada-herramientas/{ticket_id}', array(
+			'as'   =>  'entrada-herramientas',
+			'uses' =>  'AlmacenController@getEntrada'
+			));
+		Route::post('/almacen/salida-herramientas-post', array(
+			'as'   =>  'salida-herramientas-post',
+			'uses' =>  'AlmacenController@postSalida'
+			));
+		Route::post('/almacen/entrada-herramientas-post', array(
+			'as'   =>  'entrada-herramientas-post',
+			'uses' =>  'AlmacenController@postEntrada'
+			));
+
+
 
 	});//end group almacen		
 

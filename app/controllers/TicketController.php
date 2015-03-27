@@ -62,6 +62,22 @@ public function getEditarTicket($id)
  */
 public function postCreateTicket()
 {	
+    $validator = Validator::make(Input::all(),
+    array(
+        'fecha'             => 'required|date',
+        'hora'              => 'required',
+        'fecha_est_entrada' => 'date',
+        'vehiculo'          => 'required'),
+    array(
+        'required' => 'Este campo es requerido',
+        'date'     => 'No es una fecha valida',
+        'required_without' => 'Este campo es requerido cliente'
+                ));
+    if($validator->fails())
+        {
+            return Redirect::back()
+            ->withErrors($validator);
+        }
     	//Recibe las variables de la forma
     $servicio             =    Input::get('tipo');
     $cliente              =    Input::get('cliente');
@@ -199,7 +215,7 @@ public function getImprimirTicket($id)
 
 
     return View::make('tickets.imprimir-salida', array(
-        'link'    =>    'Imprimir ticket de salida',
+        'link'    =>    'Imprimir ticket de salida '.$id,
         'ticket'  =>    $ticket
         ));
 }
@@ -367,7 +383,7 @@ public function postPrecioEspecial()
 {
     $precio_especial_hora  = Input::get('precio_especial_hora');
     $precio_especial_total = Input::get('precio_especial_total');
-    $id                = Input::get('id');
+    $id                    = Input::get('id');
 
     $ticket = Ticket::find($id);
     $ticket->precio_especial_hora  = $precio_especial_hora;

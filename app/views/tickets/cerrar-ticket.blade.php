@@ -204,7 +204,7 @@
 									<label>Precio por hora</label>
 									<div class="input-group">
 									<div class="input-group-addon">$</div>
-									<input id="a2" type="text" class="form-control" 
+									<input id="a2" type="number" class="form-control" 
 									value="" name="precio_hora" required >
 								</div>
 							</div>
@@ -216,7 +216,7 @@
 									<label>Precio total</label>
 									<div class="input-group">
 									<div class="input-group-addon">$</div>
-									<input type="text" class="form-control" id="a3" 
+									<input type="number" class="form-control" id="a3" 
 									value="" name="precio_total" readonly >
 								</div>
 							</div>

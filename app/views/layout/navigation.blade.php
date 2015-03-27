@@ -12,80 +12,79 @@
 		<!-- end navbar-header -->
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		
-		<ul class="nav navbar-nav navbar-right">
+
+			<ul class="nav navbar-nav navbar-right">
 
 
-			@if(Auth::check())
+				@if(Auth::check())
 
-@if(Auth::user()->role === 'Admin' || Auth::user()->role === 'Almacen')
-<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Almacen<span class="caret"></span></a>
-				<ul class="dropdown-menu" role="menu">
-					<li><a href="">Salida de Herramientas</a></li>
-					<li><a href="">Recibir Herramientas</a></li>
-				</ul>
-			</li>	
-
-@endif			
-		
-
-@if(Auth::user()->role === 'Admin' || Auth::user()->role === 'Tickets')
-<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Tickets<span class="caret"></span></a>
-				<ul class="dropdown-menu" role="menu">
-					<li><a href="{{ URL::route('tickets') }}">Tickets Cerrados</a></li>
-				</ul>
-			</li>	
-
-<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Operadores<span class="caret"></span></a>
-				<ul class="dropdown-menu" role="menu">
-					<li><a href="{{ URL::route('crear-operador') }}">Agregar Operador</a></li>
-					<li><a href="{{ URL::route('operadores') }}">Ver Operadores</a></li>
-				</ul>
-			</li>
+				@if(Auth::user()->role === 'Admin' || Auth::user()->role === 'Almacen')
 
 
-			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Servicios<span class="caret"></span></a>
-				<ul class="dropdown-menu" role="menu">
-					<li><a href="{{ URL::route('crear-servicio') }}">Agregar Servicios</a></li>
-					<li><a href="{{ URL::route('ver-servicio') }}">Ver Servicios</a></li>
-				</ul>
-			</li>
+
+					<li><a href="{{URL::route('almacen')}}">Almacén</a></li>
+
+				
+
+				@endif			
 
 
-			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Vehículos<span class="caret"></span></a>
-				<ul class="dropdown-menu" role="menu">
-					<li><a href="{{ URL::route('crear-vehiculo') }}">Agregar Vehículo</a></li>
-					<li><a href="{{ URL::route('ver-vehiculo') }}">Ver Vehículos</a></li>
-				</ul>
-			</li>
-@endif
-			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Bienvenido {{ Auth::user()->first_name }} <span class="caret"></span></a>
-				<ul class="dropdown-menu" role="menu">
-					<li><a href="{{ URL::route('home') }}">Inicio</a></li>
-					
-					@if(Auth::user()->role === 'Admin')
-					<li class="divider"></li>
-					<li><a href="{{ URL::route('create-account') }}">Agregar Usuario</a></li>
-					<li><a href="{{ URL::route('cuentas') }}">Ver Cuentas</a></li>
-					@endif
-					<li class="divider"></li>
-					<li><a href="{{ URL::route('change-password') }}">Cambiar Contraseña</a></li>
-					<li><a href="{{ URL::route('sign-out') }}">Cerrar Sesión</a></li>
-				</ul>
-			</li>
-			@else 
-			<li><a href="{{ URL::route('home') }}">Inicio</a></li>
+				@if(Auth::user()->role === 'Admin' || Auth::user()->role === 'Tickets')
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Tickets<span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="{{ URL::route('tickets') }}">Tickets Cerrados</a></li>
+					</ul>
+				</li>	
 
-			@endif
-		</ul>
-	</div><!-- /.navbar-collapse -->
-</div> 
-<!-- end container fluid -->
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Operadores<span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="{{ URL::route('crear-operador') }}">Agregar Operador</a></li>
+						<li><a href="{{ URL::route('operadores') }}">Ver Operadores</a></li>
+					</ul>
+				</li>
+
+
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Servicios<span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="{{ URL::route('crear-servicio') }}">Agregar Servicios</a></li>
+						<li><a href="{{ URL::route('ver-servicio') }}">Ver Servicios</a></li>
+					</ul>
+				</li>
+
+
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Vehículos<span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="{{ URL::route('crear-vehiculo') }}">Agregar Vehículo</a></li>
+						<li><a href="{{ URL::route('ver-vehiculo') }}">Ver Vehículos</a></li>
+					</ul>
+				</li>
+				@endif
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Bienvenido {{ Auth::user()->first_name }} <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="{{ URL::route('home') }}">Inicio</a></li>
+
+						@if(Auth::user()->role === 'Admin')
+						<li class="divider"></li>
+						<li><a href="{{ URL::route('create-account') }}">Agregar Usuario</a></li>
+						<li><a href="{{ URL::route('cuentas') }}">Ver Cuentas</a></li>
+						@endif
+						<li class="divider"></li>
+						<li><a href="{{ URL::route('change-password') }}">Cambiar Contraseña</a></li>
+						<li><a href="{{ URL::route('sign-out') }}">Cerrar Sesión</a></li>
+					</ul>
+				</li>
+				@else 
+				<li><a href="{{ URL::route('home') }}">Inicio</a></li>
+
+				@endif
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</div> 
+	<!-- end container fluid -->
 </nav>
 <!-- end navbar -->

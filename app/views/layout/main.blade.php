@@ -29,7 +29,6 @@
 	@yield('content')
 
 	{{ HTML::script('assets/js/jquery-1.11.1.min.js') }}
-	{{ HTML::script('assets/js/format.js') }}
 	{{ HTML::script('assets/js/bootstrap.min.js') }}
 	{{ HTML::script('assets/js/functions.js') }}
 
