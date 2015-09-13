@@ -67,48 +67,55 @@
 					@endif
 					</div>
 					<div class="row">
-						<div class="col-xs-6">
+					<div class="col-xs-6">
 
-							<div class="form-group">
-								<label>Cliente</label>
+						<div class="form-group">
+							<label>Cliente</label>
 
-								<input type="text" class="form-control" 
-								value="{{ $ticket->cliente->nombre.' '.$ticket->cliente->apellidos }} " readonly>
+							<input type="text" class="form-control" 
+							value="{{ $ticket->cliente->id.' - '.$ticket->cliente->razon_social }} " readonly>
 
-							</div>
-						</div>
-						<div class="col-xs-6">
-							<div class="form-group">
-								<label>Empresa</label>
-
-								<input type="text" class="form-control" 
-								value="{{ $ticket->cliente->empresa}} " readonly>
-
-							</div>
 						</div>
 					</div>
+					<div class="col-xs-6">
+						<div class="form-group">
+							<label>RFC</label>
 
+							<input type="text" class="form-control" 
+							value="{{ $ticket->cliente->rfc}} " readonly>
 
-					<div class="row">
-						<div class="col-xs-6">
-							<div class="form-group">
-								<label>Teléfono de contacto</label>
-
-								<input type="text" class="form-control" 
-								value="{{ $ticket->cliente->telefono}} " readonly>
-
-							</div>
-						</div>
-						<div class="col-xs-6">
-							<div class="form-group">
-								<label>Dirección</label>
-
-								<input type="text" class="form-control" 
-								value="{{ $ticket->cliente->direccion}} " readonly>
-
-							</div>
 						</div>
 					</div>
+				</div>
+
+
+				<div class="row">
+					<div class="col-xs-6">
+						<div class="form-group">
+							<label>Teléfono de contacto</label>
+
+							<input type="text" class="form-control" 
+							value="{{ $ticket->cliente->telefono}} " readonly>
+
+						</div>
+					</div>
+					<div class="col-xs-6">
+						<div class="form-group">
+							<label>Email</label>
+
+							<input type="text" class="form-control" 
+							value="{{ $ticket->cliente->email}} " readonly>
+
+						</div>
+					</div>
+				</div>
+					<div class="form-group">
+							<label>Dirección</label>
+
+							<input type="text" class="form-control" 
+							value="{{'C.'.$ticket->cliente->calle.' #'.$ticket->cliente->numero_ext.' '.$ticket->cliente->colonia.', '.$ticket->cliente->ciudad}} " readonly>
+
+						</div>
 
 					<div class="row">
 						<div class="col-xs-6">
@@ -168,7 +175,7 @@
 							<div class="form-group">
 								<label>Horas Reales</label>
 
-								<input type="number" class="form-control" id="a1" 
+								<input type="number" min="0" step=".5" class="form-control" id="a1" 
 								value="{{ $ticket->horas_reales}}" name="horas_reales" required>
 
 							</div>

@@ -9,8 +9,8 @@ class VehiculoController extends \BaseController {
 	 */
 	public function vehiculos()
 	{
-		$vehiculos = Vehiculo::all();
-		$adicionales = Adicional::all();
+		$vehiculos =  Vehiculo::orderBy('nombre','asc')->get();
+		$adicionales = Adicional::orderBy('nombre','asc')->get();
 
 		return View::make('vehiculos.vehiculos', array(
 			'link' => 'Ver Vehiculos',

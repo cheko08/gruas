@@ -51,13 +51,14 @@ class ReportesController extends \BaseController {
 			->withInput();
 		}
 
-		
+		$folio = Input::get('folio');
 		$fecha = Input::get('fecha');
 		$hora  = Input::get('horas');
 		$user  = Auth::user()->id;
 
 		$reporte = Reporte::create(array(
 			'ticket_id'  => $ticket_id,
+			'folio'      => $folio,
 			'fecha'      => $fecha,
 			'horas'      => $hora,
 			'created_by' => $user
@@ -92,7 +93,6 @@ class ReportesController extends \BaseController {
 
 		return View::make('reportes.ver-reportes', array(
 			'link'       =>   'Ver Reportes',
-			'ticket_id'  =>   $ticket_id,
 			'reportes'   =>   $reportes,
 			'ticket'     =>   $ticket
 			));

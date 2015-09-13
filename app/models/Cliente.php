@@ -1,8 +1,12 @@
 <?php
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class Cliente extends Eloquent {
+	use SoftDeletingTrait;
 
-	protected $fillable 	=	['nombre','apellidos','empresa','telefono','direccion'];
+	protected $dates = ['deleted_at'];
+
+	protected $fillable 	=	['razon_social','rfc','email','calle','numero_ext','colonia','ciudad','telefono',];
 	protected $table 		=	'clientes';
 	protected $primaryKey 	=	'id';
 

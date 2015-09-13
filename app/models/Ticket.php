@@ -45,7 +45,7 @@ class Ticket extends Eloquent {
 
 	public function cliente()
 	{
-		return $this->belongsTo('Cliente');
+		return $this->belongsTo('Cliente')->withTrashed();
 	}
 
 	public function operador()

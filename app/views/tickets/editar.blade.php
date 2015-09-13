@@ -112,7 +112,8 @@
 			</div>
 			{{ Form::token() }}
 
-			<button type="submit" class="btn btn-primary">Editar Ticket</button>
+			<input type="submit" name="edit" class="btn btn-primary" value="Editar Ticket">
+			<input type="submit" name="cancel" class="btn btn-danger" value="Cancelar Ticket">
 
 		</form>
 

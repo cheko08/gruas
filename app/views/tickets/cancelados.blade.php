@@ -3,7 +3,7 @@
 
 
 <div class="container">
-	<h1>Tickets Cerrados</h1>
+	<h1>Tickets Cancelados</h1>
 	<table class="table table-striped table-condensed">
 		<thead>
 			<tr>

@@ -54,10 +54,10 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'gruas.mysql.eu1.frbit.com',
-			'database'  => 'gruas',
-			'username'  => 'gruas',
-			'password'  => 'DUurtygDhPUR2gig5aDmC6Xc',
+			'host'      => 'localhost',
+			'database'  => 'maquina7_gruas',
+			'username'  => 'maquina7_root',
+			'password'  => 'topokie1#',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

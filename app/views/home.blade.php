@@ -71,7 +71,7 @@
 					<td>{{ date("d/m/Y",strtotime($ticket->fecha_salida))}}</td>
 					<td>{{ $ticket->hora_salida }}</td>
 					<td>{{ $ticket->horas_programadas }}</td>
-					<td>{{ $ticket->cliente->nombre." ".$ticket->cliente->apellidos }}</td>
+					<td>{{ $ticket->cliente->razon_social}}</td>
 					<td>{{ $ticket->operador->referencia.' - '.$ticket->operador->nombre." ".$ticket->operador->apellido }}</td>
 					<td>{{ $ticket->vehiculo->num_economico.' - '.$ticket->vehiculo->nombre}}</td>
 				
@@ -89,6 +89,60 @@
 		</table>
 		{{ $tickets->links() }}
 	</div>
+
+@elseif(Auth::user()->role === 'Entrada')
+	
+
+<div class="container">
+	<h1>Tickets abiertos</h1>
+	<table class="table table-striped table-responsive">
+		<thead>
+			<tr>
+				
+				
+			
+			
+				<th>ID</th>
+				<th>Fecha de salida</th>
+				<th>Hora de salida</th>
+				<th>Horas estimadas</th>
+				<th>Cliente</th>
+				<th>Operador</th>
+				<th>Vehículo</th>
+				
+				
+				
+			</tr>
+		</thead>
+		<tbody>
+			@foreach($tickets as $ticket)
+			@if($ticket->horas_reales >= $ticket->horas_programadas-10)
+			<tr class="danger">
+				@else
+				<tr>
+					@endif
+					
+				
+					
+					
+					<td><a href="{{ URL::route('imprimir-ticket', $ticket->id ) }}">0{{ $ticket->id }}</a></td>
+					<td>{{ date("d/m/Y",strtotime($ticket->fecha_salida))}}</td>
+					<td>{{ $ticket->hora_salida }}</td>
+					<td>{{ $ticket->horas_programadas }}</td>
+					<td>{{ $ticket->cliente->razon_social}}</td>
+					<td>{{ $ticket->operador->referencia.' - '.$ticket->operador->nombre." ".$ticket->operador->apellido }}</td>
+					<td>{{ $ticket->vehiculo->num_economico.' - '.$ticket->vehiculo->nombre}}</td>
+				
+					
+					
+				</tr>
+
+				@endforeach
+			</tbody>
+		</table>
+		{{ $tickets->links() }}
+	</div>
+
 @endif
 
 

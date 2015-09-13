@@ -12,7 +12,7 @@ public function getCreateTicket($tipo)
     $servicio      =    Servicio::find($tipo);
     $vehiculos     =    Vehiculo::where('servicio_id', '=', $tipo)->get();
     $vehiculos_a   =    Adicional::all();
-    $clientes      =     Cliente::all();
+    $clientes      =     Cliente::orderBy('razon_social', 'ASC')->get();
 
     return View::make('tickets.crear-ticket', array(
         'link'        =>   'Ticket de Salida',
@@ -34,6 +34,17 @@ public function getTicketCerrados()
 
     return View::make('tickets.cerrados', array(
         'link'      =>  'Tickets Cerrados',
+        'tickets'   =>  $tickets
+        ));
+}
+
+public function getTicketCancelados()
+{
+    $tickets=Ticket::with('cliente','vehiculo','adicional','operador')
+    ->where('status', '=', 'Cancelado')->paginate(30);
+
+    return View::make('tickets.cancelados', array(
+        'link'      =>  'Tickets Cancelados',
         'tickets'   =>  $tickets
         ));
 }
@@ -63,31 +74,34 @@ public function getEditarTicket($id)
 public function postCreateTicket()
 {	
     $validator = Validator::make(Input::all(),
-    array(
-        'fecha'             => 'required|date',
-        'hora'              => 'required',
-        'fecha_est_entrada' => 'date',
-        'vehiculo'          => 'required'),
-    array(
-        'required' => 'Este campo es requerido',
-        'date'     => 'No es una fecha valida',
-        'required_without' => 'Este campo es requerido cliente'
-                ));
+        array(
+            'fecha'             => 'required|date',
+            'hora'              => 'required',
+            'fecha_est_entrada' => 'date',
+            'vehiculo'          => 'required'),
+        array(
+            'required' => 'Este campo es requerido',
+            'date'     => 'No es una fecha valida',
+            'required_without' => 'Este campo es requerido cliente'
+            ));
     if($validator->fails())
-        {
-            return Redirect::back()
-            ->withErrors($validator);
-        }
+    {
+        return Redirect::back()
+        ->withErrors($validator);
+    }
     	//Recibe las variables de la forma
     $servicio             =    Input::get('tipo');
     $cliente              =    Input::get('cliente');
     $vehiculo             =    Input::get('vehiculo');
     $vehiculo_adicional   =    Input::get('vehiculo_adicional');
-    $nombre               =    Input::get('nombre');
-    $apellido             =    Input::get('apellido');
-    $empresa              =    Input::get('empresa');
+    $razon                =    Input::get('razon');
+    $rfc                  =    Input::get('rfc');
+    $email                =    Input::get('email');
     $telefono             =    Input::get('telefono');
-    $direccion            =    Input::get('direccion');
+    $calle                =    Input::get('calle');
+    $num_ext              =    Input::get('num_ext');
+    $colonia              =    Input::get('colonia');
+    $ciudad               =    Input::get('ciudad');
     $operador             =    Input::get('operador');
     $fecha_salida         =    Input::get('fecha');
     $hora_salida          =    Input::get('hora');
@@ -110,11 +124,14 @@ public function postCreateTicket()
     if($cliente =='')
     {
         $cliente = Cliente::create(array(
-            'nombre'       =>    $nombre,
-            'apellidos'    =>    $apellido,
-            'empresa'      =>    $empresa,
+            'razon_social' =>    $razon,
+            'rfc'          =>    $rfc,
+            'email'        =>    $email,
             'telefono'     =>    $telefono,
-            'direccion'    =>    $direccion
+            'calle'        =>    $calle,
+            'numero_ext'   =>    $num_ext,
+            'colonia'      =>    $colonia,
+            'ciudad'       =>    $ciudad,
             ));
 
         if($cliente)
@@ -157,12 +174,12 @@ public function postCreateTicket()
     if ($ticket) {
 
 
-       $rentado = DB::select('select * from vehiculos where id = "'.$vehiculo.'" and status = "rentado"');
+     $rentado = DB::select('select * from vehiculos where id = "'.$vehiculo.'" and status = "rentado"');
 
-       $rentado_a = DB::select('select * from adicionales where id = "'.$vehiculo_adicional.'" and status = "rentado"');
+     $rentado_a = DB::select('select * from adicionales where id = "'.$vehiculo_adicional.'" and status = "rentado"');
 
-       if(count($rentado) > 0)
-       {
+     if(count($rentado) > 0)
+     {
         $rentado = 'El vehículo '.$ticket->vehiculo->nombre.' ya se encuentra rentado. Por favor verifica las fechas';
     }
     elseif(count($rentado_a) > 0)
@@ -259,16 +276,16 @@ public function postCerrarTicket()
     $tickets = Ticket::where('vehiculo_id',$ticket->vehiculo_id)->where('status','Activo')->get();
     //si no hay vehiculos rentados por otros tickets cambia el status a null
     if(count($tickets) == 0 )
-        {
-              $vehiculo = Vehiculo::find($ticket->vehiculo_id);
-              $vehiculo->status = '';
-              $vehiculo->save();
-        }
+    {
+      $vehiculo = Vehiculo::find($ticket->vehiculo_id);
+      $vehiculo->status = '';
+      $vehiculo->save();
+  }
 
   
 //busca si hay otros tickets con el vehiculo rentando
-    if( $ticket->vehiculo_adicional_id != '' )
-    {
+  if( $ticket->vehiculo_adicional_id != '' )
+  {
 
       $tickets = Ticket::where('vehiculo_adicional_id',$ticket->vehiculo_adicional_id)->where('status','Activo')->get();
       //si no hay vehiculos rentados por otros tickets cambia el status a null
@@ -277,15 +294,15 @@ public function postCerrarTicket()
         $vehiculo = Adicional::find($ticket->vehiculo_adicional_id);
         $vehiculo->status = '';
         $vehiculo->save();
-      }
-      
     }
-  
 
-  return Redirect::route('imprimir-ticket', array(
+}
+
+
+return Redirect::route('imprimir-ticket', array(
     'id' => $id,
     ))
-  ->with("create", "El ticket número ".$id." ha sido cerrado.");
+->with("create", "El ticket número ".$id." ha sido cerrado.");
 
 
 }
@@ -297,40 +314,45 @@ public function postCerrarTicket()
 public function postEditarTicket()
 {
     $id                   =    Input::get('id');
-    $vehiculo_id          =    Input::get('vehiculo');
-    $vehiculo_adicional_id=    Input::get('vehiculo_adicional');
-    $operador             =    Input::get('operador');
-    $fecha_salida         =    Input::get('fecha');
-    $hora_salida          =    Input::get('hora');
-    $fecha_est_entrada    =    Input::get('fecha_est_entrada');
-    $hora_est_entrada     =    Input::get('hora_est_entrada');
-    $horas_estimadas      =    Input::get('horas_estimadas');
-    $comments             =    Input::get('comments');
+    $user = Auth::user()->id;
 
-    $ticket = Ticket::find($id);
+    if(Input::has('edit'))
+    {
 
-    $tickets = Ticket::where('vehiculo_id',$ticket->vehiculo_id)->where('status','Activo')->get();
+        $vehiculo_id          =    Input::get('vehiculo');
+        $vehiculo_adicional_id=    Input::get('vehiculo_adicional');
+        $operador             =    Input::get('operador');
+        $fecha_salida         =    Input::get('fecha');
+        $hora_salida          =    Input::get('hora');
+        $fecha_est_entrada    =    Input::get('fecha_est_entrada');
+        $hora_est_entrada     =    Input::get('hora_est_entrada');
+        $horas_estimadas      =    Input::get('horas_estimadas');
+        $comments             =    Input::get('comments');
+
+        $ticket = Ticket::find($id);
+
+        $tickets = Ticket::where('vehiculo_id',$ticket->vehiculo_id)->where('status','Activo')->get();
     //si no hay vehiculos rentados por otros tickets cambia el status a null
-    if(count($tickets) == 1 )
+        if(count($tickets) == 1 )
         {
-              $vehiculo = Vehiculo::find($ticket->vehiculo_id);
-              $vehiculo->status = '';
-              $vehiculo->save();
-        }
+          $vehiculo = Vehiculo::find($ticket->vehiculo_id);
+          $vehiculo->status = '';
+          $vehiculo->save();
+      }
 
 
       if( $vehiculo_adicional_id != '' )
       {
 
-      $tickets = Ticket::where('vehiculo_adicional_id',$ticket->vehiculo_adicional_id)->where('status','Activo')->get();
+          $tickets = Ticket::where('vehiculo_adicional_id',$ticket->vehiculo_adicional_id)->where('status','Activo')->get();
       //si no hay vehiculos rentados por otros tickets cambia el status a null
-      if(count($tickets) == 1 )
-      {
-        $vehiculo = Adicional::find($ticket->vehiculo_adicional_id);
-        $vehiculo->status = '';
-        $vehiculo->save();
-      }
-      
+          if(count($tickets) == 1 )
+          {
+            $vehiculo = Adicional::find($ticket->vehiculo_adicional_id);
+            $vehiculo->status = '';
+            $vehiculo->save();
+        }
+
     }   
 
     $ticket->vehiculo_id           = $vehiculo_id;
@@ -358,21 +380,67 @@ public function postEditarTicket()
             ))
         ->with("create", "El ticket número ".$id." ha sido editado.");
     }
+    
     else
     {
-       
-       $vehiculo = Adicional::find($vehiculo_adicional_id);
 
-       $vehiculo->status = 'rentado';
+     $vehiculo = Adicional::find($vehiculo_adicional_id);
 
-       $vehiculo->save();
+     $vehiculo->status = 'rentado';
 
-       return Redirect::route('imprimir-ticket', array(
+     $vehiculo->save();
+
+     return Redirect::route('imprimir-ticket', array(
         'id' => $ticket->id,
         ))
-       ->with("create", "El ticket número ".$id." ha sido editado.");
+     ->with("create", "El ticket número ".$id." ha sido editado.");
 
-   }
+ }
+}
+else
+{
+
+    $ticket = Ticket::find($id);
+    
+    $ticket->status        = "Cancelado";
+    $ticket->updated_by    = $user;
+    $ticket->save();
+
+
+    //busca si hay otros tickets con el vehiculo rentando
+    $tickets = Ticket::where('vehiculo_id',$ticket->vehiculo_id)->where('status','Activo')->get();
+    //si no hay vehiculos rentados por otros tickets cambia el status a null
+    if(count($tickets) == 0 )
+    {
+      $vehiculo = Vehiculo::find($ticket->vehiculo_id);
+      $vehiculo->status = '';
+      $vehiculo->save();
+  }
+
+  
+//busca si hay otros tickets con el vehiculo rentando
+  if( $ticket->vehiculo_adicional_id != '' )
+  {
+
+      $tickets = Ticket::where('vehiculo_adicional_id',$ticket->vehiculo_adicional_id)->where('status','Activo')->get();
+      //si no hay vehiculos rentados por otros tickets cambia el status a null
+      if(count($tickets) == 0 )
+      {
+        $vehiculo = Adicional::find($ticket->vehiculo_adicional_id);
+        $vehiculo->status = '';
+        $vehiculo->save();
+    }
+
+}
+
+return Redirect::route('imprimir-ticket', array(
+    'id' => $id,
+    ))
+->with("create", "El ticket número ".$id." ha sido cancelado.");
+
+
+}
+
 
 
 
@@ -395,6 +463,13 @@ public function postPrecioEspecial()
         'id' => $ticket->id,
         ));
 
+}
+
+public function getReportes()
+{
+    return View::make('tickets.reportes', array(
+        'link'  =>  'Reportes'
+        ));
 }
 
 

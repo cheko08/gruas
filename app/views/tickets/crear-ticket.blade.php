@@ -56,7 +56,7 @@
 					<option value=""></option>
 						
 					@foreach($clientes as $cliente)
-					<option value="{{ $cliente->id }}">{{ $cliente->nombre.' '.$cliente->apellidos.' - '.$cliente->empresa }}</option>
+					<option value="{{ $cliente->id }}">{{$cliente->razon_social.' - '.$cliente->rfc }}</option>
 					@endforeach
 
 
@@ -73,17 +73,17 @@
 				
 				<div class="row">
 					<div class="col-xs-6">
-						<input type="text" placeholder="Nombre" class="form-control" name="nombre">
+						<input type="text" placeholder="Razon Social" class="form-control" name="razon">
 					</div>
 					<div class="col-xs-6">
-						<input type="text" placeholder="Apellido" class="form-control" name="apellido">
+						<input type="text" placeholder="RFC" class="form-control" name="rfc">
 					</div>
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="row">
 					<div class="col-xs-6">
-						<input type="text" placeholder="Empresa" class="form-control" name="empresa">
+						<input type="text" placeholder="Email" class="form-control" name="email">
 					</div>
 					<div class="col-xs-6">
 						<input type="text" placeholder="Teléfono" class="form-control" name="telefono">
@@ -92,7 +92,21 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<input type="text" placeholder="Dirección" class="form-control" name="direccion">
+			<div class="row">
+			<div class="col-xs-3">
+				<input type="text" placeholder="Calle" class="form-control" name="calle">
+			</div>
+			<div class="col-xs-3">
+				<input type="text" placeholder="Numero Ext" class="form-control" name="num_ext">
+			</div>
+			<div class="col-xs-3">
+				<input type="text" placeholder="Colonia" class="form-control" name="colonia">
+			</div>
+			<div class="col-xs-3">
+				<input type="text" placeholder="Ciudad" class="form-control" name="ciudad">
+			</div>
+				
+				</div>
 			</div>
 </div>
 			<div class="form-group">

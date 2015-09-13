@@ -29,7 +29,17 @@
 			
 				
 			<div class="row">
-				<div class="col-xs-6">
+			<div class="col-xs-4">
+				<div class="{{ $errors->has('folio') ? 'form-group has-error' : 'form-group' }}">
+				<label>Folio</label>
+				<input class="form-control" type="text" name="folio"
+				{{ Input::old('folio') ? 'value="'.e(Input::old('folio')).'"':'' }}>
+				@if($errors->has('folio'))
+				{{ $errors->first('folio') }}
+				@endif
+			</div>
+			</div>
+				<div class="col-xs-4">
 					<div class="{{ $errors->has('fecha') ? 'form-group has-error' : 'form-group' }}">
 				<label>Fecha</label>
 				<input class="form-control" type="date" name="fecha"
@@ -39,7 +49,7 @@
 				@endif
 			</div>
 				</div>
-				<div class="col-xs-6">
+				<div class="col-xs-4">
 				<div class="{{ $errors->has('horas') ? 'form-group has-error' : 'form-group' }}">
 				<label>Horas</label>
 				<input class="form-control" type="number" name="horas"

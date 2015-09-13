@@ -52,7 +52,7 @@
 					<div class="col-xs-6">
 						<div class="form-group">
 							<label>Vehículos</label>
-							<input type="text" class="form-control"  value="{{ $ticket->vehiculo->nombre.' - '.$ticket->adicional->nombre }}" readonly>
+							<input type="text" class="form-control"  value="{{$ticket->vehiculo->num_economico.' '.$ticket->vehiculo->nombre.' - '.$ticket->adicional->nombre }}" readonly>
 						</div>	
 					</div>
 
@@ -60,7 +60,7 @@
 						<div class="col-xs-6">
 						<div class="form-group">
 							<label>Vehículo</label>
-							<input type="text" class="form-control"  value="{{ $ticket->vehiculo->nombre }} " readonly>
+							<input type="text" class="form-control"  value="{{ $ticket->vehiculo->num_economico.' '.$ticket->vehiculo->nombre }} " readonly>
 						</div>	
 					</div>
 					@endif
@@ -72,16 +72,16 @@
 							<label>Cliente</label>
 
 							<input type="text" class="form-control" 
-							value="{{ $ticket->cliente->nombre.' '.$ticket->cliente->apellidos }} " readonly>
+							value="{{ $ticket->cliente->id.' - '.$ticket->cliente->razon_social }} " readonly>
 
 						</div>
 					</div>
 					<div class="col-xs-6">
 						<div class="form-group">
-							<label>Empresa</label>
+							<label>RFC</label>
 
 							<input type="text" class="form-control" 
-							value="{{ $ticket->cliente->empresa}} " readonly>
+							value="{{ $ticket->cliente->rfc}} " readonly>
 
 						</div>
 					</div>
@@ -100,15 +100,21 @@
 					</div>
 					<div class="col-xs-6">
 						<div class="form-group">
-							<label>Dirección</label>
+							<label>Email</label>
 
 							<input type="text" class="form-control" 
-							value="{{ $ticket->cliente->direccion}} " readonly>
+							value="{{ $ticket->cliente->email}} " readonly>
 
 						</div>
 					</div>
 				</div>
+					<div class="form-group">
+							<label>Dirección</label>
 
+							<input type="text" class="form-control" 
+							value="{{'C.'.$ticket->cliente->calle.' #'.$ticket->cliente->numero_ext.' '.$ticket->cliente->colonia.', '.$ticket->cliente->ciudad}} " readonly>
+
+						</div>
 				<div class="row">
 					<div class="col-xs-6">
 						<div class="form-group">

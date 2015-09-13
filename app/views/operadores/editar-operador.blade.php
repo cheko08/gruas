@@ -28,7 +28,7 @@
 				<label>Referencia</label>
 				<div class="{{ $errors->has('referencia') ? 'form-group has-error' : 'form-group' }}">
 				<input class="form-control" type="text" name="referencia"
-				{{ Input::old('referencia') ? 'value="'.e(Input::old('referencia')).'"':'value="'.$operadorreferencia.'".'}}>
+				{{ Input::old('referencia') ? 'value="'.e(Input::old('referencia')).'"':'value="'.$operador->referencia.'".'}}>
 				@if($errors->has('referencia'))
 				{{ $errors->first('referencia') }}
 				@endif
@@ -36,7 +36,7 @@
 			<div class="{{ $errors->has('nombre') ? 'form-group has-error' : 'form-group' }}">
 				<label>Nombre</label>
 				<input class="form-control" type="text" name="nombre"
-				{{ Input::old('nombre') ? 'value="'.e(Input::old('nombre')).'"':'value="'.$operadornombre.'".'}}>
+				{{ Input::old('nombre') ? 'value="'.e(Input::old('nombre')).'"':'value="'.$operador->nombre.'".'}}>
 				@if($errors->has('nombre'))
 				{{ $errors->first('nombre') }}
 				@endif
@@ -44,9 +44,9 @@
 			<div class="form-group">
 				<label>Apellido</label>
 				<input class="form-control" type="text" name="apellido"
-				{{ Input::old('apellido') ? 'value="'.e(Input::old('apellido')).'"':'value="'.$operadorapellido.'".'}}>
+				{{ Input::old('apellido') ? 'value="'.e(Input::old('apellido')).'"':'value="'.$operador->apellido.'".'}}>
 			</div>
-			<input type="hidden" name="operador" value="{{ $operador }}">
+			<input type="hidden" name="operador" value="{{ $operador->id }}">
 			
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary">Editar Operador</button>

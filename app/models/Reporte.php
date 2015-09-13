@@ -2,7 +2,7 @@
 
 class Reporte extends Eloquent {
 
-	protected $fillable 	=	['fecha','horas','ticket_id','created_by'];
+	protected $fillable 	=	['folio','fecha','horas','ticket_id','created_by'];
 	protected $table 		=	'reportes';
 	protected $primaryKey 	=	'id';
 

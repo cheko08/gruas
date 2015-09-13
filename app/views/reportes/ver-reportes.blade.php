@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-<h2>Reportes del ticket #{{$ticket_id}}</h2>
+<h2>Reportes del ticket #{{$ticket->id}}</h2>
 <p>Horas estimadas: {{ $ticket->horas_programadas}}</p>
 
 
@@ -39,7 +39,7 @@
 	</tr>
 	</tbody>
 </table>
-<p class="text-right"><a href="{{ URL::route('excel-reportes', $ticket_id) }}" class="btn btn-success btn-xs active" role="button">Exportar a Excel</a></p>
+<p class="text-right"><a href="{{ URL::route('excel-reportes', $ticket->id) }}" class="btn btn-success btn-xs active" role="button">Exportar a Excel</a></p>
 </div>
 
 

@@ -81,6 +81,15 @@ Route::filter('almacen', function()
 });
 
 
+Route::filter('read_only', function()
+{
+	if(Auth::user()->role != 'Entrada')
+	{
+		return Response::make('Unauthorized', 401);
+	}
+});
+
+
 Route::filter('auth.basic', function()
 {
 	return Auth::basic();

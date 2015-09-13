@@ -99,8 +99,12 @@ Route::group(array('before' => 'tickets'), function(){
 		'uses' =>  'TicketController@getEditarTicket'
 		));
 	Route::get('tickets/ticket-cerrados', array(
-		'as'   =>  'tickets',
+		'as'   =>  'tickets-cerrados',
 		'uses' =>  'TicketController@getTicketCerrados'
+		));
+	Route::get('tickets/ticket-cancelados', array(
+		'as'   =>  'tickets-cancelados',
+		'uses' =>  'TicketController@getTicketCancelados'
 		));
 	Route::get('reportes/ver-reportes/{ticket_id}', array(
 		'as'   =>  'ver-reportes',
@@ -114,6 +118,22 @@ Route::group(array('before' => 'tickets'), function(){
 	Route::get('/excel/excel-reportes/{ticket_id}', array(
 		'as'	=>	'excel-reportes',
 		'uses'	=>	'ExcelController@excelReportes'
+		));
+	Route::get('/clientes/ver-clientes', array(
+		'as'    => 'ver-clientes',
+		'uses'  => 'ClientesController@verClientes'
+		));
+	Route::get('/clientes/agregar-cliente', array(
+		'as'    => 'agregar-cliente',
+		'uses'  => 'ClientesController@createCliente'
+		));
+	Route::get('clientes/actualizar/{id}', array(
+		'as'   =>  'cliente-actualizar',
+		'uses' =>  'ClientesController@edit'
+		));
+	Route::get('tickets/reportes', array(
+		'as'   =>  'ticket-reportes',
+		'uses' =>  'TicketController@getReportes'
 		));
 
 		
@@ -165,6 +185,14 @@ Route::group(array('before' => 'tickets'), function(){
  			'as'	=>	'precio-especial',
  			'uses'	=>	'TicketController@postPrecioEspecial'
  			));
+ 		Route::post('/clientes/editar-cliente', array(
+ 			'as'    =>  'editar-cliente-post',
+ 			'uses'  =>  'ClientesController@update'
+ 			));
+ 		Route::post('/excel/historial-reportes', array(
+		'as'	=>	'historial-reportes',
+		'uses'	=>	'ExcelController@excelHistorial'
+		));
  	
 }); // end  tickets group
  			
@@ -204,6 +232,10 @@ Route::group(array('before' => 'tickets'), function(){
                 Route::get('vehiculos/vehiculo-borrar-adicional/{id}', array(
 		            'as'   =>  'adicional-borrar',
 		            'uses' =>  'VehiculoController@destroyAdicional'
+		            ));
+                Route::get('clientes/borrar/{id}', array(
+		            'as'   =>  'cliente-borrar',
+		            'uses' =>  'ClientesController@destroy'
 		            ));
 		 		
 

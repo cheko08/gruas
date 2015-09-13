@@ -17,6 +17,9 @@
 
 
 				@if(Auth::check())
+			
+					
+
 
 				@if(Auth::user()->role === 'Admin' || Auth::user()->role === 'Almacen')
 
@@ -31,9 +34,19 @@
 
 				@if(Auth::user()->role === 'Admin' || Auth::user()->role === 'Tickets')
 				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Clientes<span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+					<li><a href="{{ URL::route('agregar-cliente') }}">Agregar Clientes</a></li>
+						<li><a href="{{ URL::route('ver-clientes') }}">Ver Clientes</a></li>
+
+					</ul>
+				</li>	
+				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Tickets<span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="{{ URL::route('tickets') }}">Tickets Cerrados</a></li>
+						<li><a href="{{ URL::route('tickets-cerrados') }}">Tickets Cerrados</a></li>
+						<li><a href="{{ URL::route('tickets-cancelados') }}">Tickets Cancelados</a></li>
+						<li><a href="{{ URL::route('ticket-reportes') }}">Reportes</a></li>
 					</ul>
 				</li>	
 

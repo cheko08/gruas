@@ -60,6 +60,7 @@
 					<option value="Admin">Administrador</option>
 					<option value="Tickets">Tickets</option>
 					<option value="Almacen">Almacén</option>
+					<option value="Entrada">Entrada</option>
 				</select>
 
 			</div>

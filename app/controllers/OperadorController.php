@@ -9,7 +9,8 @@ class OperadorController extends \BaseController {
 	 */
 	public function operadores()
 	{
-		$operadores = Operador::all();
+		$operadores = Operador::orderBy('nombre', 'asc')->get();
+
 		return View::make('operadores.operadores', array(
 			'link'       =>  'Operadores',
 			'operadores' =>  $operadores
@@ -85,15 +86,11 @@ class OperadorController extends \BaseController {
 	 */
 	public function editOperador($id)
 	{	
-		$operador            = DB::table('operadores')->where('id', $id)->pluck('id');
-		$operador_referencia = DB::table('operadores')->where('id', $id)->pluck('referencia');
-		$operador_nombre     = DB::table('operadores')->where('id', $id)->pluck('nombre');
-		$operador_apellido   = DB::table('operadores')->where('id', $id)->pluck('apellido');
+		
+		$operador = Operador::find($id);
+
 		return View::make('operadores.editar-operador', array(
 			'link'                =>   'Editar Operador',
-			'operadorreferencia' =>   $operador_referencia,
-			'operadornombre' =>   $operador_nombre,
-			'operadorapellido' =>   $operador_apellido,
 			'operador' =>   $operador,
 			));
 	}
@@ -154,7 +151,10 @@ class OperadorController extends \BaseController {
 			->with('global-error','El Operador no puede ser borrado. Hay tickets con este operador asignado.');
 		}
 		
-		Operador::find($id)->delete();
+		$operador = Operador::find($id);
+		$operador->referencia = '-';
+		$operador->save();
+		$operador->delete();
 		return Redirect::route('operadores');
 	}
 

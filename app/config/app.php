@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://gruas.eu1.frbit.net',
+	'url' => 'http://maquinariagrupoordonez.com/',
 
 	/*
 	|--------------------------------------------------------------------------
